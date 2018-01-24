@@ -49,9 +49,9 @@ public class Selection {
         for (int i = 0; i < n; i++) {
             int min = i;
             for (int j = i+1; j < n; j++) {
-                if (less(a[j], a[min])) min = j;
+                if (less(a[j], a[min])) min = j;//找到剩下元素的最小值
             }
-            exch(a, i, min);
+            exch(a, i, min);//将本次最小值与已经排好序的队列的最后一个元素交换
             assert isSorted(a, 0, i);
         }
         assert isSorted(a);

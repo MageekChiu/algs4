@@ -28,7 +28,7 @@ public class BubbleSort {
                     noChange = false;//有交换
                 }
             }
-            System.out.println(noChange);
+            System.out.println(noChange);//展示跑了多少趟,几个打印就对应几趟
         }
     }
 
@@ -37,7 +37,7 @@ public class BubbleSort {
      */
     public static void main(String[] args) throws InstantiationException, IllegalAccessException {
 //        Integer[] a = {3,4,7,12,3,7,8,9,18,33,24,6,15,45,27};
-        Integer[] a = {3,4,7,9,12,13,16,20};
+        Integer[] a = {3,4,7,9,12,32,13,16,20};
 //        Double[] a = {3.0,4.4,7.5,12.1,3.3,7.4,8.4,9.4,18.5,33.6,24.8,6.6,15.2,45.1,27.2};
 //        StdRandom.shuffle(a);
         show(a);

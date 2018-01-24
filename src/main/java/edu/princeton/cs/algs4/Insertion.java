@@ -59,7 +59,7 @@ public class Insertion {
         int n = a.length;
         for (int i = 0; i < n; i++) {
             for (int j = i; j > 0 && less(a[j], a[j-1]); j--) {
-                exch(a, j, j-1);
+                exch(a, j, j-1);//将未排序的第一个数据插入已排序的数据汇中的合适位置
             }
             assert isSorted(a, 0, i);
         }

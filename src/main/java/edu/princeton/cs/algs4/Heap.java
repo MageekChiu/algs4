@@ -44,9 +44,9 @@ public class Heap {
      */
     public static void sort(Comparable[] pq) {
         int n = pq.length;
-        for (int k = n/2; k >= 1; k--)
+        for (int k = n/2; k >= 1; k--)//构造堆，从最后一个有子节点的节点开始比较和下沉，直至根节点
             sink(pq, k, n);
-        while (n > 1) {
+        while (n > 1) {//堆排序
             exch(pq, 1, n--);
             sink(pq, 1, n);
         }
@@ -59,10 +59,10 @@ public class Heap {
     private static void sink(Comparable[] pq, int k, int n) {
         while (2*k <= n) {
             int j = 2*k;
-            if (j < n && less(pq, j, j+1)) j++;
-            if (!less(pq, k, j)) break;
-            exch(pq, k, j);
-            k = j;
+            if (j < n && less(pq, j, j+1)) j++;//先比较左右子节点，找到较大的
+            if (!less(pq, k, j)) break;//大于较大的子节点，无需下沉
+            exch(pq, k, j);//否则下沉
+            k = j;//继续比较以这个节点为根的子树
         }
     }
 

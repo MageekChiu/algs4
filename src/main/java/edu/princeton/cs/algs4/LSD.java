@@ -148,7 +148,7 @@ public class LSD {
         // sort the strings
         sort(a, w);
 
-        // print results
+        // show results
         for (int i = 0; i < n; i++)
             StdOut.println(a[i]);
     }

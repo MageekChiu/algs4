@@ -90,7 +90,7 @@ import java.util.regex.Pattern;
  *  <pre>
  *  while (StdIn.hasNextChar()) {
  *      char c = StdIn.readChar();
- *      StdOut.print(c);
+ *      StdOut.show(c);
  *  }
  *  </pre>
  *  <p>

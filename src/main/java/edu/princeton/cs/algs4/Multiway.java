@@ -52,7 +52,7 @@ public class Multiway {
             if (!streams[i].isEmpty())
                 pq.insert(i, streams[i].readString());
 
-        // Extract and print min and read next from its stream. 
+        // Extract and show min and read next from its stream.
         while (!pq.isEmpty()) {
             StdOut.print(pq.minKey() + " ");
             int i = pq.delMin();

@@ -47,7 +47,7 @@ import java.util.Locale;
  *       for consistency with {@link StdIn}, {@link Double#parseDouble(String)},
  *       and floating-point literals.
  *  <li> {@code StdOut} <em>flushes</em> standard output after each call to
- *       {@code print()} so that text will appear immediately in the terminal.
+ *       {@code show()} so that text will appear immediately in the terminal.
  *  </ul>
  *  <p>
  *  <b>Reference.</b>
@@ -100,7 +100,7 @@ public final class StdOut {
    /**
      * Prints an object to this output stream and then terminates the line.
      *
-     * @param x the object to print
+     * @param x the object to show
      */
     public static void println(Object x) {
         out.println(x);
@@ -109,7 +109,7 @@ public final class StdOut {
    /**
      * Prints a boolean to standard output and then terminates the line.
      *
-     * @param x the boolean to print
+     * @param x the boolean to show
      */
     public static void println(boolean x) {
         out.println(x);
@@ -118,7 +118,7 @@ public final class StdOut {
    /**
      * Prints a character to standard output and then terminates the line.
      *
-     * @param x the character to print
+     * @param x the character to show
      */
     public static void println(char x) {
         out.println(x);
@@ -127,7 +127,7 @@ public final class StdOut {
    /**
      * Prints a double to standard output and then terminates the line.
      *
-     * @param x the double to print
+     * @param x the double to show
      */
     public static void println(double x) {
         out.println(x);
@@ -136,7 +136,7 @@ public final class StdOut {
    /**
      * Prints an integer to standard output and then terminates the line.
      *
-     * @param x the integer to print
+     * @param x the integer to show
      */
     public static void println(float x) {
         out.println(x);
@@ -145,7 +145,7 @@ public final class StdOut {
    /**
      * Prints an integer to standard output and then terminates the line.
      *
-     * @param x the integer to print
+     * @param x the integer to show
      */
     public static void println(int x) {
         out.println(x);
@@ -154,7 +154,7 @@ public final class StdOut {
    /**
      * Prints a long to standard output and then terminates the line.
      *
-     * @param x the long to print
+     * @param x the long to show
      */
     public static void println(long x) {
         out.println(x);
@@ -163,7 +163,7 @@ public final class StdOut {
    /**
      * Prints a short integer to standard output and then terminates the line.
      *
-     * @param x the short to print
+     * @param x the short to show
      */
     public static void println(short x) {
         out.println(x);
@@ -174,7 +174,7 @@ public final class StdOut {
      * <p>
      * To write binary data, see {@link BinaryStdOut}.
      *
-     * @param x the byte to print
+     * @param x the byte to show
      */
     public static void println(byte x) {
         out.println(x);
@@ -190,7 +190,7 @@ public final class StdOut {
    /**
      * Prints an object to standard output and flushes standard output.
      * 
-     * @param x the object to print
+     * @param x the object to show
      */
     public static void print(Object x) {
         out.print(x);
@@ -200,7 +200,7 @@ public final class StdOut {
    /**
      * Prints a boolean to standard output and flushes standard output.
      * 
-     * @param x the boolean to print
+     * @param x the boolean to show
      */
     public static void print(boolean x) {
         out.print(x);
@@ -210,7 +210,7 @@ public final class StdOut {
    /**
      * Prints a character to standard output and flushes standard output.
      * 
-     * @param x the character to print
+     * @param x the character to show
      */
     public static void print(char x) {
         out.print(x);
@@ -220,7 +220,7 @@ public final class StdOut {
    /**
      * Prints a double to standard output and flushes standard output.
      * 
-     * @param x the double to print
+     * @param x the double to show
      */
     public static void print(double x) {
         out.print(x);
@@ -230,7 +230,7 @@ public final class StdOut {
    /**
      * Prints a float to standard output and flushes standard output.
      * 
-     * @param x the float to print
+     * @param x the float to show
      */
     public static void print(float x) {
         out.print(x);
@@ -240,7 +240,7 @@ public final class StdOut {
    /**
      * Prints an integer to standard output and flushes standard output.
      * 
-     * @param x the integer to print
+     * @param x the integer to show
      */
     public static void print(int x) {
         out.print(x);
@@ -250,7 +250,7 @@ public final class StdOut {
    /**
      * Prints a long integer to standard output and flushes standard output.
      * 
-     * @param x the long integer to print
+     * @param x the long integer to show
      */
     public static void print(long x) {
         out.print(x);
@@ -260,7 +260,7 @@ public final class StdOut {
    /**
      * Prints a short integer to standard output and flushes standard output.
      * 
-     * @param x the short integer to print
+     * @param x the short integer to show
      */
     public static void print(short x) {
         out.print(x);
@@ -270,7 +270,7 @@ public final class StdOut {
    /**
      * Prints a byte to standard output and flushes standard output.
      *
-     * @param x the byte to print
+     * @param x the byte to show
      */
     public static void print(byte x) {
         out.print(x);

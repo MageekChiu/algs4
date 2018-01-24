@@ -231,7 +231,7 @@ public class FloydWarshall {
         // run Floyd-Warshall algorithm
         FloydWarshall spt = new FloydWarshall(G);
 
-        // print all-pairs shortest path distances
+        // show all-pairs shortest path distances
         StdOut.printf("  ");
         for (int v = 0; v < G.V(); v++) {
             StdOut.printf("%6d ", v);
@@ -246,7 +246,7 @@ public class FloydWarshall {
             StdOut.println();
         }
 
-        // print negative cycle
+        // show negative cycle
         if (spt.hasNegativeCycle()) {
             StdOut.println("Negative cost cycle:");
             for (DirectedEdge e : spt.negativeCycle())
@@ -254,7 +254,7 @@ public class FloydWarshall {
             StdOut.println();
         }
 
-        // print all-pairs shortest paths
+        // show all-pairs shortest paths
         else {
             for (int v = 0; v < G.V(); v++) {
                 for (int w = 0; w < G.V(); w++) {

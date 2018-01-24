@@ -196,7 +196,7 @@ public class UF {
      * (between {@code 0} and {@code n-1}) from standard input, where each integer
      * in the pair represents some site;
      * if the sites are in different components, merge the two components
-     * and print the pair to standard output.
+     * and show the pair to standard output.
      *
      * @param args the command-line arguments
      */

@@ -290,7 +290,7 @@ public class AssignmentProblem {
         StdOut.printf("weight = %.0f\n", assignment.weight());
         StdOut.println();
 
-        // print n-by-n matrix and optimal solution
+        // show n-by-n matrix and optimal solution
         if (n >= 20) return;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {

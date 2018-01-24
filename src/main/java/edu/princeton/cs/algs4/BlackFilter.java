@@ -6,7 +6,7 @@
  *                https://algs4.cs.princeton.edu/35applications/list.txt
  *
  *  Read in a blacklist of words from a file. Then read in a list of
- *  words from standard input and print out all those words that
+ *  words from standard input and show out all those words that
  *  are not in the first file.
  * 
  *  % more tinyTale.txt 

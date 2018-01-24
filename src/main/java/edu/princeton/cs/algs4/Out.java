@@ -111,7 +111,7 @@ public class Out {
    /**
      * Prints an object to this output stream and then terminates the line.
      *
-     * @param x the object to print
+     * @param x the object to show
      */
     public void println(Object x) {
         out.println(x);
@@ -120,7 +120,7 @@ public class Out {
    /**
      * Prints a boolean to this output stream and then terminates the line.
      *
-     * @param x the boolean to print
+     * @param x the boolean to show
      */
     public void println(boolean x) {
         out.println(x);
@@ -129,7 +129,7 @@ public class Out {
    /**
      * Prints a character to this output stream and then terminates the line.
      *
-     * @param x the character to print
+     * @param x the character to show
      */
     public void println(char x) {
         out.println(x);
@@ -138,7 +138,7 @@ public class Out {
    /**
      * Prints a double to this output stream and then terminates the line.
      *
-     * @param x the double to print
+     * @param x the double to show
      */
     public void println(double x) {
         out.println(x);
@@ -147,7 +147,7 @@ public class Out {
    /**
      * Prints a float to this output stream and then terminates the line.
      *
-     * @param x the float to print
+     * @param x the float to show
      */
     public void println(float x) {
         out.println(x);
@@ -156,7 +156,7 @@ public class Out {
    /**
      * Prints an integer to this output stream and then terminates the line.
      *
-     * @param x the integer to print
+     * @param x the integer to show
      */
     public void println(int x) {
         out.println(x);
@@ -165,7 +165,7 @@ public class Out {
    /**
      * Prints a long to this output stream and then terminates the line.
      *
-     * @param x the long to print
+     * @param x the long to show
      */
     public void println(long x) {
         out.println(x);
@@ -176,7 +176,7 @@ public class Out {
      * <p>
      * To write binary data, see {@link BinaryOut}.
      *
-     * @param x the byte to print
+     * @param x the byte to show
      */
     public void println(byte x) {
         out.println(x);
@@ -194,7 +194,7 @@ public class Out {
    /**
      * Prints an object to this output stream and flushes this output stream.
      * 
-     * @param x the object to print
+     * @param x the object to show
      */
     public void print(Object x) {
         out.print(x);
@@ -204,7 +204,7 @@ public class Out {
    /**
      * Prints a boolean to this output stream and flushes this output stream.
      * 
-     * @param x the boolean to print
+     * @param x the boolean to show
      */
     public void print(boolean x) {
         out.print(x);
@@ -214,7 +214,7 @@ public class Out {
    /**
      * Prints a character to this output stream and flushes this output stream.
      * 
-     * @param x the character to print
+     * @param x the character to show
      */
     public void print(char x) {
         out.print(x);
@@ -224,7 +224,7 @@ public class Out {
    /**
      * Prints a double to this output stream and flushes this output stream.
      * 
-     * @param x the double to print
+     * @param x the double to show
      */
     public void print(double x) {
         out.print(x);
@@ -234,7 +234,7 @@ public class Out {
    /**
      * Prints a float to this output stream and flushes this output stream.
      * 
-     * @param x the float to print
+     * @param x the float to show
      */
     public void print(float x) {
         out.print(x);
@@ -244,7 +244,7 @@ public class Out {
    /**
      * Prints an integer to this output stream and flushes this output stream.
      * 
-     * @param x the integer to print
+     * @param x the integer to show
      */
     public void print(int x) {
         out.print(x);
@@ -254,7 +254,7 @@ public class Out {
    /**
      * Prints a long integer to this output stream and flushes this output stream.
      * 
-     * @param x the long integer to print
+     * @param x the long integer to show
      */
     public void print(long x) {
         out.print(x);
@@ -264,7 +264,7 @@ public class Out {
    /**
      * Prints a byte to this output stream and flushes this output stream.
      * 
-     * @param x the byte to print
+     * @param x the byte to show
      */
     public void print(byte x) {
         out.print(x);

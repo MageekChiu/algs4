@@ -99,14 +99,14 @@ public class TransitiveClosure {
 
         TransitiveClosure tc = new TransitiveClosure(G);
 
-        // print header
+        // show header
         StdOut.print("     ");
         for (int v = 0; v < G.V(); v++)
             StdOut.printf("%3d", v);
         StdOut.println();
         StdOut.println("--------------------------------------------");
 
-        // print transitive closure
+        // show transitive closure
         for (int v = 0; v < G.V(); v++) {
             StdOut.printf("%3d: ", v);
             for (int w = 0; w < G.V(); w++) {

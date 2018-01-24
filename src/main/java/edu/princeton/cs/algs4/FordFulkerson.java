@@ -258,7 +258,7 @@ public class FordFulkerson {
             }
         }
 
-        // print min-cut
+        // show min-cut
         StdOut.print("Min cut: ");
         for (int v = 0; v < G.V(); v++) {
             if (maxflow.inCut(v)) StdOut.print(v + " ");

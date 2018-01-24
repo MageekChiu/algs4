@@ -340,7 +340,7 @@ public class IndexMinPQ<Key extends Comparable<Key>> implements Iterable<Integer
             pq.insert(i, strings[i]);
         }
 
-        // delete and print each key
+        // delete and show each key
         while (!pq.isEmpty()) {
             int i = pq.delMin();
             StdOut.println(i + " " + strings[i]);
@@ -352,7 +352,7 @@ public class IndexMinPQ<Key extends Comparable<Key>> implements Iterable<Integer
             pq.insert(i, strings[i]);
         }
 
-        // print each key using the iterator
+        // show each key using the iterator
         for (int i : pq) {
             StdOut.println(i + " " + strings[i]);
         }

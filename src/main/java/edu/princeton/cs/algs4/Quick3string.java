@@ -144,7 +144,7 @@ public class Quick3string {
         // sort the strings
         sort(a);
 
-        // print the results
+        // show the results
         for (int i = 0; i < n; i++)
             StdOut.println(a[i]);
     }

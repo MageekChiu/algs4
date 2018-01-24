@@ -115,7 +115,7 @@ public class Knuth {
         // shuffle the array
         Knuth.shuffle(a);
 
-        // print results.
+        // show results.
         for (int i = 0; i < a.length; i++)
             StdOut.println(a[i]);
     }

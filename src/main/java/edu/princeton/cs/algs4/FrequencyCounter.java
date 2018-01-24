@@ -8,7 +8,7 @@
  *                https://algs4.cs.princeton.edu/31elementary/leipzig300K.txt
  *                https://algs4.cs.princeton.edu/31elementary/leipzig1M.txt
  *
- *  Read in a list of words from standard input and print out
+ *  Read in a list of words from standard input and show out
  *  the most frequently occurring word that has length greater than
  *  a given threshold.
  *

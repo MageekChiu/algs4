@@ -45,7 +45,7 @@ public class RandomSeq {
 
         // for backward compatibility with Intro to Programming in Java version of RandomSeq
         if (args.length == 1) {
-            // generate and print n numbers between 0.0 and 1.0
+            // generate and show n numbers between 0.0 and 1.0
             for (int i = 0; i < n; i++) {
                 double x = StdRandom.uniform();
                 StdOut.println(x);
@@ -56,7 +56,7 @@ public class RandomSeq {
             double lo = Double.parseDouble(args[1]);
             double hi = Double.parseDouble(args[2]);
 
-            // generate and print n numbers between lo and hi
+            // generate and show n numbers between lo and hi
             for (int i = 0; i < n; i++) {
                 double x = StdRandom.uniform(lo, hi);
                 StdOut.printf("%.2f\n", x);

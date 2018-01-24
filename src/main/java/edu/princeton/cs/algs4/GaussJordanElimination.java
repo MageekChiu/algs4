@@ -198,7 +198,7 @@ public class GaussJordanElimination {
         return primal() != null;
     }
 
-    // print the tableaux
+    // show the tableaux
     private void show() {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {

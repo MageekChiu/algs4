@@ -268,7 +268,7 @@ public class TST<Value> {
             st.put(key, i);
         }
 
-        // print results
+        // show results
         if (st.size() < 100) {
             StdOut.println("keys(\"\"):");
             for (String key : st.keys()) {

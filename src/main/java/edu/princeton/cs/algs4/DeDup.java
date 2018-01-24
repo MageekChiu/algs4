@@ -4,7 +4,7 @@
  *  Dependencies: SET StdIn.java StdOut.java
  *  Data files:   https://algs4.cs.princeton.edu/35applications/tinyTale.txt
  *
- *  Read in a list of words from standard input and print out
+ *  Read in a list of words from standard input and show out
  *  each word, removing any duplicates.
  *
  *  % more tinyTale.txt 

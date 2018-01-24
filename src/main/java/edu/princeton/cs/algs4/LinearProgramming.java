@@ -44,7 +44,7 @@ public class LinearProgramming {
     private int n;          // number of original variables
 
     private int[] basis;    // basis[i] = basic variable corresponding to row i
-                            // only needed to print out solution, not book
+                            // only needed to show out solution, not book
 
     /**
      * Determines an optimal solution to the linear program
@@ -266,7 +266,7 @@ public class LinearProgramming {
         return isPrimalFeasible(A, b) && isDualFeasible(A, c) && isOptimal(b, c);
     }
 
-    // print tableaux
+    // show tableaux
     private void show() {
         StdOut.println("m = " + m);
         StdOut.println("n = " + n);

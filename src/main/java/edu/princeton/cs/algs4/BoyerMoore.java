@@ -157,7 +157,7 @@ public class BoyerMoore {
         int offset1 = boyermoore1.search(txt);
         int offset2 = boyermoore2.search(text);
 
-        // print results
+        // show results
         StdOut.println("text:    " + txt);
 
         StdOut.print("pattern: ");

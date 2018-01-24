@@ -318,7 +318,7 @@ public class BipartiteMatching {
 
         BipartiteMatching matching = new BipartiteMatching(G);
         
-        // print maximum matching
+        // show maximum matching
         StdOut.printf("Number of edges in max matching        = %d\n", matching.size());
         StdOut.printf("Number of vertices in min vertex cover = %d\n", matching.size());
         StdOut.printf("Graph has a perfect matching           = %b\n", matching.isPerfect());
@@ -329,12 +329,12 @@ public class BipartiteMatching {
         StdOut.print("Max matching: ");
         for (int v = 0; v < G.V(); v++) {
             int w = matching.mate(v);
-            if (matching.isMatched(v) && v < w)  // print each edge only once
+            if (matching.isMatched(v) && v < w)  // show each edge only once
                 StdOut.print(v + "-" + w + " ");
         }
         StdOut.println();
 
-        // print minimum vertex cover
+        // show minimum vertex cover
         StdOut.print("Min vertex cover: ");
         for (int v = 0; v < G.V(); v++)
             if (matching.inMinVertexCover(v))

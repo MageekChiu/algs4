@@ -159,7 +159,7 @@ public class RabinKarp {
         RabinKarp searcher = new RabinKarp(pat);
         int offset = searcher.search(txt);
 
-        // print results
+        // show results
         StdOut.println("text:    " + txt);
 
         // from brute force search method 1

@@ -319,7 +319,7 @@ public class SET<Key extends Comparable<Key>> implements Iterable<Key> {
         StdOut.println("set = " + set);
         StdOut.println();
 
-        // print out all keys in this set in lexicographic order
+        // show out all keys in this set in lexicographic order
         for (String s : set) {
             StdOut.println(s);
         }

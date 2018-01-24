@@ -252,7 +252,7 @@ public class TrieSET implements Iterable<String> {
             set.add(key);
         }
 
-        // print results
+        // show results
         if (set.size() < 100) {
             StdOut.println("keys(\"\"):");
             for (String key : set) {

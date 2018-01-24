@@ -331,7 +331,7 @@ public class IndexMaxPQ<Key extends Comparable<Key>> implements Iterable<Integer
             pq.insert(i, strings[i]);
         }
 
-        // print each key using the iterator
+        // show each key using the iterator
         for (int i : pq) {
             StdOut.println(i + " " + strings[i]);
         }
@@ -346,7 +346,7 @@ public class IndexMaxPQ<Key extends Comparable<Key>> implements Iterable<Integer
                 pq.decreaseKey(i, strings[i].substring(0, 1));
         }
 
-        // delete and print each key
+        // delete and show each key
         while (!pq.isEmpty()) {
             String key = pq.maxKey();
             int i = pq.delMax();

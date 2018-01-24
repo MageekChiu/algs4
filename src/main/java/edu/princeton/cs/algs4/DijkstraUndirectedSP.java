@@ -232,7 +232,7 @@ public class DijkstraUndirectedSP {
         DijkstraUndirectedSP sp = new DijkstraUndirectedSP(G, s);
 
 
-        // print shortest path
+        // show shortest path
         for (int t = 0; t < G.V(); t++) {
             if (sp.hasPathTo(t)) {
                 StdOut.printf("%d to %d (%.2f)  ", s, t, sp.distTo(t));

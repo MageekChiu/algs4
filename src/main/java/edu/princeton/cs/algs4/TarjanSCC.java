@@ -180,7 +180,7 @@ public class TarjanSCC {
             components[scc.id(v)].enqueue(v);
         }
 
-        // print results
+        // show results
         for (int i = 0; i < m; i++) {
             for (int v : components[i]) {
                 StdOut.print(v + " ");

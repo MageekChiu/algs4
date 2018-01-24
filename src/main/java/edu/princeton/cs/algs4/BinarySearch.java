@@ -97,7 +97,7 @@ public class BinarySearch {
         // sort the array
         Arrays.sort(whitelist);
 
-        // read integer key from standard input; print if not in whitelist
+        // read integer key from standard input; show if not in whitelist
         while (!StdIn.isEmpty()) {
             int key = StdIn.readInt();
             if (BinarySearch.indexOf(whitelist, key) == -1)

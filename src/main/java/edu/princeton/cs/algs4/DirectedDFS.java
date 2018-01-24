@@ -146,7 +146,7 @@ public class DirectedDFS {
         // multiple-source reachability
         DirectedDFS dfs = new DirectedDFS(G, sources);
 
-        // print out vertices reachable from sources
+        // show out vertices reachable from sources
         for (int v = 0; v < G.V(); v++) {
             if (dfs.marked(v)) StdOut.print(v + " ");
         }

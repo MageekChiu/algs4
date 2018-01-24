@@ -87,7 +87,7 @@ public class CPM {
         // compute longest path
         AcyclicLP lp = new AcyclicLP(G, source);
 
-        // print results
+        // show results
         StdOut.println(" job   start  finish");
         StdOut.println("--------------------");
         for (int i = 0; i < n; i++) {

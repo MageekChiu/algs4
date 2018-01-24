@@ -8,7 +8,7 @@
  *  Create an alphabet specified on the command line, read in a 
  *  sequence of characters over that alphabet (ignoring characters
  *  not in the alphabet), computes the frequency of occurrence of
- *  each character, and print out the results.
+ *  each character, and show out the results.
  *
  *  %  java Count ABCDR < abra.txt 
  *  A 5

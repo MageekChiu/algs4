@@ -197,7 +197,7 @@ public class SeparateChainingHashST<Key, Value> {
             st.put(key, i);
         }
 
-        // print keys
+        // show keys
         for (String s : st.keys()) 
             StdOut.println(s + " " + st.get(s)); 
 

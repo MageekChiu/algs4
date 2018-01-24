@@ -89,10 +89,10 @@ public class Huffman {
         String[] st = new String[R];
         buildCode(st, root, "");
 
-        // print trie for decoder
+        // show trie for decoder
         writeTrie(root);
 
-        // print number of bytes in original uncompressed message
+        // show number of bytes in original uncompressed message
         BinaryStdOut.write(input.length);
 
         // use Huffman code to encode input

@@ -59,7 +59,7 @@ public class TopM {
                 pq.delMin();
         }   // top m entries are on the PQ
 
-        // print entries on PQ in reverse order
+        // show entries on PQ in reverse order
         Stack<Transaction> stack = new Stack<Transaction>();
         for (Transaction transaction : pq)
             stack.push(transaction);

@@ -58,7 +58,7 @@ public class Whitelist {
         int[] white = in.readAllInts();
         StaticSETofInts set = new StaticSETofInts(white);
 
-        // Read key, print if not in whitelist.
+        // Read key, show if not in whitelist.
         while (!StdIn.isEmpty()) {
             int key = StdIn.readInt();
             if (!set.contains(key))

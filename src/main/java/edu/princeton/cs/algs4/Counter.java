@@ -109,7 +109,7 @@ public class Counter implements Comparable<Counter> {
             hits[StdRandom.uniform(n)].increment();
         }
 
-        // print results
+        // show results
         for (int i = 0; i < n; i++) {
             StdOut.println(hits[i]);
         }

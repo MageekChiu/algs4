@@ -159,7 +159,7 @@ public class KMP {
         KMP kmp2 = new KMP(pattern, 256);
         int offset2 = kmp2.search(text);
 
-        // print results
+        // show results
         StdOut.println("text:    " + txt);
 
         StdOut.print("pattern: ");

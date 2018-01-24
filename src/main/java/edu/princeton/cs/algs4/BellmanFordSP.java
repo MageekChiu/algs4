@@ -271,13 +271,13 @@ public class BellmanFordSP {
 
         BellmanFordSP sp = new BellmanFordSP(G, s);
 
-        // print negative cycle
+        // show negative cycle
         if (sp.hasNegativeCycle()) {
             for (DirectedEdge e : sp.negativeCycle())
                 StdOut.println(e);
         }
 
-        // print shortest paths
+        // show shortest paths
         else {
             for (int v = 0; v < G.V(); v++) {
                 if (sp.hasPathTo(v)) {

@@ -171,7 +171,7 @@ public class QuickFindUF {
      * Reads in a sequence of pairs of integers (between 0 and n-1) from standard input, 
      * where each integer represents some site;
      * if the sites are in different components, merge the two components
-     * and print the pair to standard output.
+     * and show the pair to standard output.
      *
      * @param args the command-line arguments
      */

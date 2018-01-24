@@ -53,7 +53,7 @@ public class Average {
         // compute the average
         double average = sum / count;
 
-        // print results
+        // show results
         StdOut.println("Average is " + average);
     }
 }

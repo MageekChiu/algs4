@@ -250,14 +250,14 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
      * @return the subtree with restored AVL property
      */
     private Node balance(Node x) {
-        if (balanceFactor(x) < -1) {
-            if (balanceFactor(x.right) > 0) {
+        if (balanceFactor(x) < -1) {//右边高
+            if (balanceFactor(x.right) > 0) {//右左
                 x.right = rotateRight(x.right);
             }
             x = rotateLeft(x);
         }
-        else if (balanceFactor(x) > 1) {
-            if (balanceFactor(x.left) < 0) {
+        else if (balanceFactor(x) > 1) {//左边高
+            if (balanceFactor(x.left) < 0) {//左右
                 x.left = rotateLeft(x.left);
             }
             x = rotateRight(x);

@@ -8,12 +8,11 @@ import java.util.Random;
  */
 public class SkipList <T>{
     private SkipListNode<T> head,tail;
-    private int nodes;//节点总数
+    private int nodeNumber;//节点总数
     private int listLevel;//层数
     private Random random;// 用于投掷硬币
     private static final double PROBABILITY=0.5;//向上提升一个的概率
     public SkipList() {
-        // TODO Auto-generated constructor stub
         random=new Random();
         clear();
     }
@@ -25,14 +24,14 @@ public class SkipList <T>{
         tail=new SkipListNode<T>(SkipListNode.TAIL_KEY, null);
         horizontalLink(head, tail);
         listLevel=0;
-        nodes=0;
+        nodeNumber =0;
     }
     public boolean isEmpty(){
-        return nodes==0;
+        return nodeNumber ==0;
     }
 
     public int size() {
-        return nodes;
+        return nodeNumber;
     }
     /**
      * 在最下面一层，找到要插入的位置前面的那个key
@@ -102,7 +101,7 @@ public class SkipList <T>{
             q=e;
             currentLevel++;
         }
-        nodes++;//层数递增
+        nodeNumber++;//层数递增
     }
     //node1后面插入node2
     private void backLink(SkipListNode<T> node1,SkipListNode<T> node2){

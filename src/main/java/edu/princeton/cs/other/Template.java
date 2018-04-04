@@ -1,9 +1,9 @@
 package edu.princeton.cs.other;
 
+import static java.lang.System.out;
 /**
  *
  * @author Mageek Chiu
- * @date 2018/3/29 0029:12:21
  */
 class Template {
 
@@ -19,7 +19,8 @@ class Template {
     public static void main (String ...args){
        int[] nums = {2, 7, 11, 15}; int target = 9;
        int[] res = twoSum(nums,target);
-       System.out.println(res[0]+","+res[1]);
+
+       out.println();
 
     }
 }

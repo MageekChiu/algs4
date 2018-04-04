@@ -40,9 +40,10 @@ class TwoListAdd {
             int mod = result % 10;// 取余数就是本位该存的数
             ListNode thisRes = new ListNode(mod);
             tail.next = thisRes; tail = thisRes;
-            carry = result - mod;// 得到进位
+            carry = (result - mod)/10;// 得到进位
             noNull=noNull.next;
         }
+        if(carry!=0) tail.next = new ListNode(carry);
         return res.next;// 去掉第一个0
     }
 

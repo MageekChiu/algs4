@@ -81,5 +81,10 @@
 		</profile>
 	</profiles>
 	<dependencies>
+        <dependency>
+            <groupId>cn.mageek</groupId>
+            <artifactId>client</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 	</dependencies>  
 </project>

@@ -1,0 +1,25 @@
+[INFO ] 2018-05-11 16:14:13,037 cn.mageek.client.handler.WatchHandler.channelActive(WatchHandler.java:26):opened connection to: /192.168.0.136:10102
+[DEBUG] 2018-05-11 16:14:13,041 cn.mageek.client.Connection.lambda$connect$0(Connection.java:92):send nameNode heartbeat:WatchRequest -- immediately:false,hash ring :{}
+[DEBUG] 2018-05-11 16:14:13,095 cn.mageek.client.handler.WatchHandler.channelRead(WatchHandler.java:37):DataNode received: WatchResponse -- hashCircle:{948316787=192.168.0.136:10100}
+[DEBUG] 2018-05-11 16:14:13,096 cn.mageek.client.Connection.connect(Connection.java:102):nameNode connection established and Heartbeat started
+[DEBUG] 2018-05-11 16:14:13,114 cn.mageek.client.Connection.getDataNodeConnection(Connection.java:164):DataNode 192.168.0.136:10100 connection established
+[INFO ] 2018-05-11 16:14:13,114 cn.mageek.client.handler.DataHandler.channelActive(DataHandler.java:30):opened connection to: /192.168.0.136:10100
+[DEBUG] 2018-05-11 16:14:13,115 cn.mageek.client.Connection.sendCommand(Connection.java:199):client 向 192.168.0.136:10100 请求 DataRequest -- command: SET, key: 192.168.0.136:10099, value: 123456, dataType: STRING, ID: 1526026453097__@__152134087
+[DEBUG] 2018-05-11 16:14:13,168 cn.mageek.client.handler.DataHandler.channelRead(DataHandler.java:42):DataNode received: DataResponse -- lineType:+,msg:OK, ID: 1526026453097__@__152134087
+[DEBUG] 2018-05-11 16:14:13,169 cn.mageek.client.Connection.sendCommand(Connection.java:199):client 向 192.168.0.136:10100 请求 DataRequest -- command: GET, key: 192.168.0.136:10099, value: , dataType: STRING, ID: 1526026453168__@__1540011289
+[DEBUG] 2018-05-11 16:14:13,172 cn.mageek.client.handler.DataHandler.channelRead(DataHandler.java:42):DataNode received: DataResponse -- lineType:$,msg:123456, ID: 1526026453168__@__1540011289
+[DEBUG] 2018-05-11 16:14:13,173 cn.mageek.client.Connection.sendCommand(Connection.java:199):client 向 192.168.0.136:10100 请求 DataRequest -- command: SET, key: 112, value: 23, dataType: STRING, ID: 1526026453172__@__239465106
+[DEBUG] 2018-05-11 16:14:13,188 cn.mageek.client.handler.DataHandler.channelRead(DataHandler.java:42):DataNode received: DataResponse -- lineType:+,msg:OK, ID: 1526026453172__@__239465106
+[DEBUG] 2018-05-11 16:14:13,189 cn.mageek.client.Connection.sendCommand(Connection.java:199):client 向 192.168.0.136:10100 请求 DataRequest -- command: DEL, key: 1321, value: , dataType: STRING, ID: 1526026453189__@__1596000437
+[DEBUG] 2018-05-11 16:14:13,195 cn.mageek.client.handler.DataHandler.channelRead(DataHandler.java:42):DataNode received: DataResponse -- lineType::,msg:0, ID: 1526026453189__@__1596000437
+[DEBUG] 2018-05-11 16:14:13,198 cn.mageek.client.Connection.sendCommand(Connection.java:199):client 向 192.168.0.136:10100 请求 DataRequest -- command: DEL, key: 112, value: , dataType: STRING, ID: 1526026453198__@__832947102
+[DEBUG] 2018-05-11 16:14:13,201 cn.mageek.client.handler.DataHandler.channelRead(DataHandler.java:42):DataNode received: DataResponse -- lineType::,msg:1, ID: 1526026453198__@__832947102
+[DEBUG] 2018-05-11 16:14:13,203 cn.mageek.client.Connection.disconnect(Connection.java:118):关闭连接
+[DEBUG] 2018-05-11 16:14:13,203 cn.mageek.client.Connection.lambda$connect$0(Connection.java:96):nameNode heartbeat InterruptedException,sleep interrupted
+[DEBUG] 2018-05-11 16:14:13,204 cn.mageek.client.Connection.lambda$disconnect$2(Connection.java:122):dataNode 192.168.0.136:10100 connection isOpen
+[DEBUG] 2018-05-11 16:14:13,205 cn.mageek.client.Connection.lambda$getDataNodeConnection$3(Connection.java:167):DataNode Connection connection closed
+[DEBUG] 2018-05-11 16:14:13,205 cn.mageek.client.Connection.lambda$disconnect$2(Connection.java:128):dataNode 192.168.0.136:10100 connection closed
+[DEBUG] 2018-05-11 16:14:13,206 cn.mageek.client.Connection.disconnect(Connection.java:131):all closed
+[DEBUG] 2018-05-11 16:14:13,206 cn.mageek.client.Connection.lambda$connect$1(Connection.java:105):nameNode Connection connection closed
+[INFO ] 2018-05-11 16:14:13,207 cn.mageek.client.handler.DataHandler.channelInactive(DataHandler.java:35):closed connection: /192.168.0.136:10100
+[INFO ] 2018-05-11 16:14:13,207 cn.mageek.client.handler.WatchHandler.channelInactive(WatchHandler.java:31):closed connection: /192.168.0.136:10102

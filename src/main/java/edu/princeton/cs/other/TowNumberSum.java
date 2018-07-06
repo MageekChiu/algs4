@@ -20,6 +20,15 @@ import java.util.Map;
  */
 class TowNumberSum {
 
+    /**
+     * 两遍hash表的做法
+     * 一个简单的实现使用了两次迭代。在第一次迭代中，我们将每个元素的值和它的索引添加到表中。
+     * 然后，在第二次迭代中，我们将检查每个元素所对应的目标元素（target - nums[i]target−nums[i]）是否存在于表中。
+     * 注意，该目标元素不能是 nums[i]nums[i] 本身！,需要注意排重
+     * @param nums
+     * @param target
+     * @return
+     */
     public static int[] twoSum(int[] nums, int target) {
         int [] res = {0,0};
         Map<Integer,String> map = new HashMap<>();
@@ -85,8 +94,21 @@ class TowNumberSum {
     }
 
 
-
-
+    // 1遍hash表的做法
+    // 事实证明，我们可以一次完成。在进行迭代并将元素插入到表中的同时，
+    // 我们还会回过头来检查表中是否已经存在当前元素所对应的目标元素。
+    // 如果它存在，那我们已经找到了对应解，并立即将其返回。
+    public int[] twoSum1Hash(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (map.containsKey(complement)) {
+                return new int[] { map.get(complement), i };
+            }
+            map.put(nums[i], i);
+        }
+        throw new IllegalArgumentException("No two sum solution");
+    }
 
     public static void main (String ...args){
 //        int[] nums = {3,2,4}; int target = 6;

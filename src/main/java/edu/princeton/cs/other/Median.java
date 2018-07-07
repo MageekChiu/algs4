@@ -122,7 +122,7 @@ class Median {
         out.print("parentp1");
     }
 
-
+    // 感受：归一化的能力亦即把中位数转化为number k问题，然后就是分治的思想，有序的列表都很容易使用分治的思想
     public static void main (String ...args){
         int[] nums = {1,3};
         int[] nums1 = {2,4,6,8,9};

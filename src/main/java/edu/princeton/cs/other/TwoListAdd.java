@@ -83,7 +83,7 @@ class TwoListAdd {
         return res.next;// 去掉第一个0
     }
 
-
+    // 感受： 基本数学概念，然后就是各种特殊情况的考虑
     public static void main (String ...args){
         ListNode a = new ListNode(2);ListNode a1 = new ListNode(4);ListNode a2 = new ListNode(3);a.next=a1;a1.next=a2;
         ListNode b = new ListNode(5);ListNode b1 = new ListNode(6);ListNode b2 = new ListNode(4);b.next=b1;b1.next=b2;
@@ -136,7 +136,33 @@ class TwoListAdd {
 
 
     /**
-     * 单向列表翻转
+     * 递归反转法：在反转当前节点之前先反转后续节点。这样从头结点开始，层层深入直到尾结点才开始反转指针域的指向。
+     * 简单的说就是从尾结点开始，逆向反转各个结点的指针域指向，其过程图如下所示：
+     head：是前一结点的指针域（PS：前一结点的指针域指向当前结点）
+     head.getNext()：是当前结点的指针域（PS：当前结点的指针域指向下一结点）
+     reHead：是反转后新链表的头结点（即原来单链表的尾结点）
+     */
+//    public static Node Reverse1(Node head) {
+//        // head看作是前一结点，head.getNext()是当前结点，reHead是反转后新链表的头结点
+//        if (head == null || head.getNext() == null) {
+//            return head;// 若为空链或者当前结点在尾结点，则直接还回
+//        }
+//        Node reHead = Reverse1(head.getNext());// 先反转后续节点head.getNext()
+//        head.getNext().setNext(head);// 将当前结点的指针域指向前一结点
+//        head.setNext(null);// 前一结点的指针域令为null;
+//        return reHead;// 反转后新链表的头结点
+//    }
+
+
+
+    /**
+     * 单向列表翻转，遍历
+     * 归反转法是从后往前逆序反转指针域的指向，而遍历反转法是从前往后反转各个结点的指针域的指向。
+     基本思路是：将当前节点cur的下一个节点 cur.getNext()缓存到temp后，然后更改当前节点指针指向上一结点pre。
+     也就是说在反转当前结点指针指向前，先把当前结点的指针域用tmp临时保存，以便下一次使用，其过程可表示如下：
+     pre：上一结点
+     cur: 当前结点
+     tmp: 临时结点，用于保存当前结点的指针域（即下一结点）
      * @param l1
      * @return
      */
@@ -157,5 +183,7 @@ class TwoListAdd {
         l1.next = null;// 翻转后列表的尾部是空的
         return pre;
     }
+
+
 
 }

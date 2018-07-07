@@ -1,8 +1,5 @@
 package edu.princeton.cs.other;
 
-import edu.princeton.cs.algs4.Quick;
-import edu.princeton.cs.algs4.StdRandom;
-
 import static java.lang.System.out;
 /**
  *
@@ -16,6 +13,7 @@ class Template {
         return ans;
     }
 
+    // 感受：
     public static void main (String ...args){
         int[] nums = {-2,2,-3,4,-1,2,1,-5,3};// 符合要求的子数组为[4,−1,2,1]，其最大和为6
         int res = maxSumSubArray(nums);//

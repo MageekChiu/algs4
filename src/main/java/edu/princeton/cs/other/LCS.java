@@ -1,5 +1,10 @@
 package edu.princeton.cs.other;
 
+import edu.princeton.cs.algs4.Stack;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 import static java.lang.System.out;
 
 /**
@@ -293,6 +298,102 @@ class LCS {
         return ans;
     }
 
+    /**
+     * 判断整数是否是回文，首先转化为字符串,然后可以用翻转直接比较 也可用递归
+     * @param x
+     * @return
+     */
+    public static boolean isPalindrome(int x) {
+        String s = String.valueOf(x);
+        return isPalindrome(s,0,s.length()-1);
+    }
+
+    public static boolean isPalindrome(String s,int i,int j) {
+        if (i >= j) return true;
+        return s.charAt(i) == s.charAt(j) && isPalindrome(s,i + 1, j - 1);
+    }
+
+    /**
+     * 判断数字是否回文，不用字符串 可以用栈
+
+     * @param x
+     * @return
+     */
+    public static boolean isPalindromeWithoutString(int x) {
+        if (x<0) return false;// 因为有负号肯定不是回文
+
+        Deque<Integer> integerStack = new ArrayDeque<>();
+        int mod = x % 10;
+        integerStack.push(mod);
+        int left = x - mod;
+        left /= 10;
+        while (left>10){
+            mod = left%10;
+            integerStack.push(mod);
+            left -= mod;
+            left /= 10;
+        }
+        integerStack.push(left);
+
+        Integer result = 0,tmp;
+        int times = 1;
+        while ((tmp = integerStack.poll()) !=null){
+            result += times*tmp;
+            times *= 10;
+        }
+
+        return result.equals(x);
+    }
+
+    /**
+     还有更妙的 反转一半数字
+
+     映入脑海的第一个想法是将数字转换为字符串，并检查字符串是否为回文。但是，这需要额外的非常量空间来创建问题描述中所不允许的字符串。
+     第二个想法是将数字本身反转，然后将反转后的数字与原始数字进行比较，如果它们是相同的，那么这个数字就是回文。
+     但是，如果反转后的数字大于 \text{int.MAX}int.MAX，我们将遇到整数溢出问题。
+
+     按照第二个想法，为了避免数字反转可能导致的溢出问题，为什么不考虑只反转 \text{int}int 数字的一半？毕竟，如果该数字是回文，
+     其后半部分反转后应该与原始数字的前半部分相同。
+
+     例如，输入 1221，我们可以将数字“1221”的后半部分从“21”反转为“12”，并将其与前半部分“12”进行比较，因为二者相同，我们得知数字 1221 是回文。
+     让我们看看如何将这个想法转化为一个算法。
+
+     算法
+
+     首先，我们应该处理一些临界情况。所有负数都不可能是回文，例如：-123 不是回文，因为 - 不等于 3。所以我们可以对所有负数返回 false。
+
+     现在，让我们来考虑如何反转后半部分的数字。 对于数字 1221，如果执行 1221 % 10，我们将得到最后一位数字 1，
+     要得到倒数第二位数字，我们可以先通过除以 10 把最后一位数字从 1221 中移除，1221 / 10 = 122，再求出上一步结果除以10的余数，122 % 10 = 2，
+     就可以得到倒数第二位数字。如果我们把最后一位数字乘以10，再加上倒数第二位数字，1 * 10 + 2 = 12，就得到了我们想要的反转后的数字。
+     如果继续这个过程，我们将得到更多位数的反转数字。
+
+     现在的问题是，我们如何知道反转数字的位数已经达到原始数字位数的一半？
+     我们将原始数字除以 10，然后给反转后的数字乘上 10，所以，当原始数字小于反转后的数字时，就意味着我们已经处理了一半位数的数字。
+     * @param x
+     * @return
+     */
+    public boolean IsPalindrome(int x) {
+        // 特殊情况：
+        // 如上所述，当 x < 0 时，x 不是回文数。
+        // 同样地，如果数字的最后一位是 0，为了使该数字为回文，
+        // 则其第一位数字也应该是 0
+        // 只有 0 满足这一属性
+        if(x < 0 || (x % 10 == 0 && x != 0)) {
+            return false;
+        }
+
+        int revertedNumber = 0;
+        while(x > revertedNumber) {
+            revertedNumber = revertedNumber * 10 + x % 10;
+            x /= 10;
+        }
+
+        // 当数字长度为奇数时，我们可以通过 revertedNumber/10 去除处于中位的数字。
+        // 例如，当输入为 12321 时，在 while 循环的末尾我们可以得到 x = 12，revertedNumber = 123，
+        // 由于处于中位的数字不影响回文（它总是与自己相等），所以我们可以简单地将其去除。
+        return x == revertedNumber || x == revertedNumber/10;
+    }
+
 
 
     // 感受：动态规划和经典LCS的应用
@@ -307,29 +408,40 @@ class LCS {
 //        System.out.println("Length of LCS1 is " + lcs1(s1,s2 ));
 
 
-        String a = "babad";
-        String res = longestPalindromeWithBreak(a);
-        out.println(res);//bab或者aba   长度 3
-        String res1 = longestPalindrome(a);
-        out.println(res1);//bab或者aba   长度 3
+//        String a = "babad";
+//        String res = longestPalindromeWithBreak(a);
+//        out.println(res);//bab或者aba   长度 3
+//        String res1 = longestPalindrome(a);
+//        out.println(res1);//bab或者aba   长度 3
+//
+//        a = "cbbd";
+//        res = longestPalindromeWithBreak(a);
+//        out.println(res);//bb    长度 2
+//        res1 = longestPalindrome(a);
+//        out.println(res1);//bb    长度 2
+//
+//        a = "abccbd";
+//        res = longestPalindromeWithBreak(a);
+//        out.println(res);//bccb    长度 4
+//        res1 = longestPalindrome(a);
+//        out.println(res1);//bccb    长度 4
+//
+//        a = "abcdasdfghjkldcba";
+//        res = longestPalindromeWithBreak(a);
+//        out.println(res);//abcd    长度 4
+//        res1 = longestPalindrome(a);
+//        out.println(res1);//a    长度 1
 
-        a = "cbbd";
-        res = longestPalindromeWithBreak(a);
-        out.println(res);//bb    长度 2
-        res1 = longestPalindrome(a);
-        out.println(res1);//bb    长度 2
+//        out.println(isPalindrome(121));
+//        out.println(isPalindrome(1221));
+//        out.println(isPalindrome(132441));
+//        out.println(isPalindrome(-121));
 
-        a = "abccbd";
-        res = longestPalindromeWithBreak(a);
-        out.println(res);//bccb    长度 4
-        res1 = longestPalindrome(a);
-        out.println(res1);//bccb    长度 4
-
-        a = "abcdasdfghjkldcba";
-        res = longestPalindromeWithBreak(a);
-        out.println(res);//abcd    长度 4
-        res1 = longestPalindrome(a);
-        out.println(res1);//a    长度 1
+        out.println(isPalindromeWithoutString(121));
+        out.println(isPalindromeWithoutString(1221));
+        out.println(isPalindromeWithoutString(1345431));
+        out.println(isPalindromeWithoutString(132441));
+        out.println(isPalindromeWithoutString(-121));
     }
 
 }

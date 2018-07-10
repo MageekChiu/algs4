@@ -50,7 +50,7 @@ class ValidBrackets {
                     stack.push(thisChar);
                     break;
                 case '}':
-                    exceptChar = stack.poll();
+                    exceptChar = stack.poll();// pop 不存在会报exception，poll返回null
                     if(exceptChar==null || exceptChar != '{')
                         return false;
                     break;
@@ -66,10 +66,7 @@ class ValidBrackets {
                     break;
             }
         }
-        if (stack.size()<1)
-            return true;
-        else
-            return false;
+        return stack.size() < 1;
     }
 
     // 感受：基本概念的逻辑，对应到栈的应用,注意特殊情况

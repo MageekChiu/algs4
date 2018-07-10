@@ -105,7 +105,7 @@ class TwoNumberSum {
             if (map.containsKey(complement)) {// 先判断
                 return new int[] { map.get(complement), i };
             }
-            map.put(nums[i], i);// 再放进去，这样就不会重复判断自己
+            map.put(nums[i], i);// 再放进去，这样就不会重复判断自己，相同的数也只会存一个下标
         }
         throw new IllegalArgumentException("No two sum solution");
     }

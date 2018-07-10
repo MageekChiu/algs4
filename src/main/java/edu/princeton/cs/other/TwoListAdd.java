@@ -84,6 +84,7 @@ class TwoListAdd {
     }
 
     // 感受： 基本数学概念，然后就是各种特殊情况的考虑
+    // 有联系的多考虑递归
     public static void main (String ...args){
         ListNode a = new ListNode(2);
         ListNode a1 = new ListNode(4);
@@ -110,12 +111,20 @@ class TwoListAdd {
 //            out.print(resV.val+"->");
 //            resV = resV.next;
 //        }
+//        out.println();
 
-        // 交换列表
-        ListNode resS = swapPairs(a);
-        while (resS!=null){//遍历打印
-            out.print(resS.val+"->");
-            resS = resS.next;
+//        // 元素两两交换的列表
+//        ListNode resS = swapPairs(a);
+//        while (resS!=null){//遍历打印
+//            out.print(resS.val+"->");
+//            resS = resS.next;
+//        }
+
+//        //元素k个为一组进行翻转的列表
+        ListNode resV = reverseKGroup(a,2);
+        while (resV!=null){//遍历打印
+            out.print(resV.val+"->");
+            resV = resV.next;
         }
 
     }
@@ -230,6 +239,37 @@ class TwoListAdd {
         temp.next=head;
         return temp;
     }
+
+    /**
+     ，我们用head记录每段的开始位置，cur记录结束位置的下一个节点，然后我们调用reverse函数来将这段翻转，
+     然后得到一个new_head，原来的head就变成了末尾，这时候后面接上递归调用下一段得到的新节点，返回new_head即可，参见代码如下
+     * @param head
+     * @param k
+     * @return
+     */
+    public static ListNode reverseKGroup(ListNode head, int k) {
+        ListNode cur = head;
+        for (int i = 0; i < k; ++i) {
+            if (cur==null) return head;
+            cur = cur.next;
+        }
+        ListNode new_head = reverse(head, cur);
+        head.next = reverseKGroup(cur, k);
+        return new_head;
+    }
+    public static ListNode reverse(ListNode head, ListNode tail) {
+        ListNode pre = tail;
+        while (head != tail) {
+            ListNode t = head.next;
+            head.next = pre;
+            pre = head;
+            head = t;
+        }
+        return pre;
+    }
+
+
+
 
 
 

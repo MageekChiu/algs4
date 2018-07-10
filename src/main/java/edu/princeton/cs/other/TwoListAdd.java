@@ -85,23 +85,37 @@ class TwoListAdd {
 
     // 感受： 基本数学概念，然后就是各种特殊情况的考虑
     public static void main (String ...args){
-        ListNode a = new ListNode(2);ListNode a1 = new ListNode(4);ListNode a2 = new ListNode(3);a.next=a1;a1.next=a2;
-        ListNode b = new ListNode(5);ListNode b1 = new ListNode(6);ListNode b2 = new ListNode(4);b.next=b1;b1.next=b2;
+        ListNode a = new ListNode(2);
+        ListNode a1 = new ListNode(4);
+        ListNode a2 = new ListNode(3);
+        a.next=a1;a1.next=a2;
 
-        // 两个列表相加
-        ListNode res = addTwoNumbers(a,b);// 342 + 465 = 807,所以输出 7,0,8
-        while (res!=null){//遍历打印
-            out.print(res.val+"->");
-            res = res.next;
-        }
+        ListNode b = new ListNode(5);
+        ListNode b1 = new ListNode(6);
+        ListNode b2 = new ListNode(4);
+        b.next=b1;b1.next=b2;
 
-        out.println();
+//        // 两个列表相加
+//        ListNode res = addTwoNumbers(a,b);// 342 + 465 = 807,所以输出 7,0,8
+//        while (res!=null){//遍历打印
+//            out.print(res.val+"->");
+//            res = res.next;
+//        }
 
-        // 翻转列表
-        ListNode resV = revertList(a);
-        while (resV!=null){//遍历打印
-            out.print(resV.val+"->");
-            resV = resV.next;
+//        out.println();
+
+//        // 翻转列表
+//        ListNode resV = revertList(a);
+//        while (resV!=null){//遍历打印
+//            out.print(resV.val+"->");
+//            resV = resV.next;
+//        }
+
+        // 交换列表
+        ListNode resS = swapPairs(a);
+        while (resS!=null){//遍历打印
+            out.print(resS.val+"->");
+            resS = resS.next;
         }
 
     }
@@ -168,20 +182,53 @@ class TwoListAdd {
      */
     public static ListNode revertList(ListNode l1){
 
-        if (l1==null) return l1;
+        if (l1==null) return null;
         ListNode pre = l1;
         ListNode cur = l1.next;
         ListNode tmp;
 
         // l1,l2,l3,l4,l5,l6
         while (cur != null){
-            tmp = cur.next;
-            cur.next = pre;
-            pre = cur;
-            cur = tmp;
+            tmp = cur.next;// 保存下一个节点，一开始就是第三个节点
+            cur.next = pre;// 反向
+            pre = cur;// 反向
+            cur = tmp;// 移动当前指针至下一个节点
         }
         l1.next = null;// 翻转后列表的尾部是空的
         return pre;
+    }
+
+    /**
+     给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。
+     示例:
+     给定 1->2->3->4, 你应该返回 2->1->4->3.
+     说明:
+     你的算法只能使用常数的额外空间。
+     你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
+
+     利用递归的思想，依次交换链表中的节点对。具体对于每个节点来说：
+
+     若该节点为NULL，则直接返回NULL
+     若该节点的下一个节点为NULL，则直接返回该节点
+     否则交换该节点与下一个节点，利用辅助指针记录该节点的下一个节点，并递归的交换接下来的节点对
+
+     非递归的思路
+     思路：
+
+     1.p代表上一对交换完成的节点中的后者。l代表即将进行交换节点对的左节点，r代表即将进行交换节点对的右节点。
+     2.首先将l指向r的下一个节点；在将r指向l；最后将p指向r。即完成当前节点对的交换。
+
+     // 感悟这种交换链表关键是就是理顺思路，循环体都是可复用的，因此每一步都要保存上一步的状态和必要的中间状态
+
+     * @return
+     */
+    public static ListNode swapPairs(ListNode head) {
+        if(head ==null) return null;
+        if(head.next==null) return head;
+        ListNode temp=head.next;
+        head.next=swapPairs(temp.next);
+        temp.next=head;
+        return temp;
     }
 
 

@@ -201,7 +201,7 @@ class SearchRange {
      此时left = 1, right = 13, mid = 7, 遍历完之后 cnt = 2, 此时left更新为8
      此时left = 8, right = 13, mid = 10, 遍历完之后 cnt = 2, 此时left更新为11
      此时left = 11, right = 12, mid = 11, 遍历完之后 cnt = 2, 此时left更新为12
-     循环结束，left和right均为12，任意返回一个即可。
+     循环结束，left和right均为12，任意返回一个即可。 复杂度O(nlgn*lgX)
 
 
      上面的解法还可以进一步优化到O(nlgX)，其中X为最大值和最小值的差值，我们并不用对每一行都做二分搜索法，

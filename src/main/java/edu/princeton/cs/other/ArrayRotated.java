@@ -121,11 +121,12 @@ class ArrayRotated {
     }
 
     /**
-     * 指定范围内的二分查找
+     * 指定范围内的二分查找 [start,end)，所以一般就调用 binarySearch(num,0,num.length,6)
+     * 这种涉及边界的一开始就要定义好如果不包含 end 那么 r 就是从 end -1 开始的
      */
     public static int binarySearch(int[] nums,int start,int end,int target){
         if (start < 0 || end > nums.length) return -1;// 排除特殊
-        int l = start,r = end,middle;
+        int l = start,r = end-1,middle;
         while (l<=r){
             middle = (l+r)/2;
             if (target==nums[middle]){
@@ -177,7 +178,7 @@ class ArrayRotated {
 //        int[] nums = {3,1};
 //        System.out.println(searchRepeat(nums,1));
 
-        int[] nums = {1,1,3,1};
-        System.out.println(searchRepeat(nums,3));
+//        int[] nums = {1,1,3,1};
+//        System.out.println(searchRepeat(nums,3));
     }
 }

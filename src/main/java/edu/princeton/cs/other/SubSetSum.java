@@ -10,7 +10,7 @@ import static java.lang.System.out;
  */
 class SubSetSum {
 
-    public static int SubSetSum(int[] nums,int C) {
+    public static int subSetSum(int[] nums,int C) {
         int len = nums.length,sum = 0,ans = Integer.MIN_VALUE;
 
         return ans;
@@ -19,7 +19,7 @@ class SubSetSum {
     public static void main (String ...args){
         int[] S1 = {-2,2,3,4,-1,4,1,-5,6}; int C = 13;//
         Arrays.sort(S1);
-        int res = SubSetSum(S1,C);//
+        int res = subSetSum(S1,C);//
         out.println(res);
     }
 }

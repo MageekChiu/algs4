@@ -136,7 +136,8 @@ class TwoListAdd {
         ListNode(int x,ListNode y) { val = x;next=y; }
     }
 
-    // 简便的做法，复杂度为O(n)
+    // 简便的做法，复杂度为O(n),实际上每个循环都要判断，效率并不是高，只是代码整洁一些
+    // 两数求和的一般模式：carry初始化为0，两数+carry求和，求carry，求mod就是当前位置的数
     public ListNode addTwoNumber(ListNode l1, ListNode l2) {
         ListNode dummyHead = new ListNode(0);
         ListNode p = l1, q = l2, curr = dummyHead;

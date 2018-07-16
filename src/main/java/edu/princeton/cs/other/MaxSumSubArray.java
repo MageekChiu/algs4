@@ -1,7 +1,5 @@
 package edu.princeton.cs.other;
 
-import edu.princeton.cs.algs4.Quick;
-
 import static java.lang.System.out;
 
 /**
@@ -13,7 +11,7 @@ import static java.lang.System.out;
 class MaxSumSubArray {
 
     public static int maxSumSubArray(int[] nums) {
-        int len = nums.length,sum = 0,ans = Integer.MIN_VALUE;
+        int sum = 0,ans = Integer.MIN_VALUE;
         for (int num : nums) {
             sum += num;
             if (sum > ans) ans = sum;

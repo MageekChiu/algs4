@@ -121,6 +121,21 @@ class NextPermutation {
         }
     }
 
+    public static String getPermutation(int n, int k) {
+        int[] start = new int[n];
+        for (int i = 0;i<n;i++){
+            start[i] = i+1;
+        }
+        while (--k>0){
+            nextPermutation(start);
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i : start) {
+            sb.append(i);
+        }
+        return sb.toString();
+    }
+
     // 感受：不熟悉的场景要抓住本质，可以通过特例进行归纳总结，特例要考虑一般的，也要考虑特殊的，比如
     // 本题 的 66 就是特殊的
     public static void main (String ...args){
@@ -133,22 +148,25 @@ class NextPermutation {
 //            out.print(nums[i]+",");
 //        }
 
-        int[] nums = {1,1};
-        nextPermutation(nums);// 1,1
-        for (int i = 0; i < nums.length; i++) {
-            out.print(nums[i]+",");
-        }
-        out.println();
-        int[] nums1 = {4,3,2,1};
-        nextPermutation(nums1);// 1,2,3,4
-        for (int i = 0; i < nums1.length; i++) {
-            out.print(nums1[i]+",");
-        }
-        out.println();
-        int[] nums2 = {1,3,2};
-        nextPermutation(nums2);// 2,1,3
-        for (int i = 0; i < nums2.length; i++) {
-            out.print(nums2[i]+",");
-        }
+//        int[] nums = {1,1};
+//        nextPermutation(nums);// 1,1
+//        for (int i = 0; i < nums.length; i++) {
+//            out.print(nums[i]+",");
+//        }
+//        out.println();
+//        int[] nums1 = {4,3,2,1};
+//        nextPermutation(nums1);// 1,2,3,4
+//        for (int i = 0; i < nums1.length; i++) {
+//            out.print(nums1[i]+",");
+//        }
+//        out.println();
+//        int[] nums2 = {1,3,2};
+//        nextPermutation(nums2);// 2,1,3
+//        for (int i = 0; i < nums2.length; i++) {
+//            out.print(nums2[i]+",");
+//        }
+
+        out.println(getPermutation(3,3));
+        out.println(getPermutation(4,9));
     }
 }

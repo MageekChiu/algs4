@@ -86,15 +86,15 @@ class TwoListAdd {
     // 感受： 基本数学概念，然后就是各种特殊情况的考虑
     // 有联系的多考虑递归
     public static void main (String ...args){
-        ListNode a = new ListNode(2);
-        ListNode a1 = new ListNode(4);
-        ListNode a2 = new ListNode(3);
-        a.next=a1;a1.next=a2;
+//        ListNode a = new ListNode(2);
+//        ListNode a1 = new ListNode(4);
+//        ListNode a2 = new ListNode(3);
+//        a.next=a1;a1.next=a2;
 
-        ListNode b = new ListNode(5);
-        ListNode b1 = new ListNode(6);
-        ListNode b2 = new ListNode(4);
-        b.next=b1;b1.next=b2;
+//        ListNode b = new ListNode(5);
+//        ListNode b1 = new ListNode(6);
+//        ListNode b2 = new ListNode(4);
+//        b.next=b1;b1.next=b2;
 
 //        // 两个列表相加
 //        ListNode res = addTwoNumbers(a,b);// 342 + 465 = 807,所以输出 7,0,8
@@ -121,10 +121,30 @@ class TwoListAdd {
 //        }
 
 //        //元素k个为一组进行翻转的列表
-        ListNode resV = reverseKGroup(a,2);
-        while (resV!=null){//遍历打印
-            out.print(resV.val+"->");
-            resV = resV.next;
+//        ListNode resV = reverseKGroup(a,2);
+//        while (resV!=null){//遍历打印
+//            out.print(resV.val+"->");
+//            resV = resV.next;
+//        }
+
+//        // 旋转链表
+//        ListNode a = new ListNode(2);
+//        ListNode a2 = new ListNode(3);
+//        ListNode a1 = new ListNode(4);
+//        ListNode a3 = new ListNode(5);
+//        a.next=a2;a2.next=a1;a1.next = a3;
+//        ListNode resV = rotateRight(a,5);
+//        while (resV!=null){//遍历打印
+//            out.print(resV.val+"->");
+//            resV = resV.next;
+//        }
+
+        // 旋转数组
+//        int[] nums = new int[]{1,2,3,4,5,6,7};
+        int[] nums = new int[]{1,2,3,4,5,6};
+        rotateArray(nums,2);
+        for (int num : nums) {
+            out.print(num+",");
         }
 
     }
@@ -181,7 +201,7 @@ class TwoListAdd {
 
     /**
      * 单向列表翻转，遍历
-     * 归反转法是从后往前逆序反转指针域的指向，而遍历反转法是从前往后反转各个结点的指针域的指向。
+     * 递归反转法是从后往前逆序反转指针域的指向，而遍历反转法是从前往后反转各个结点的指针域的指向。
      基本思路是：将当前节点cur的下一个节点 cur.getNext()缓存到temp后，然后更改当前节点指针指向上一结点pre。
      也就是说在反转当前结点指针指向前，先把当前结点的指针域用tmp临时保存，以便下一次使用，其过程可表示如下：
      pre：上一结点
@@ -191,12 +211,10 @@ class TwoListAdd {
      * @return
      */
     public static ListNode revertList(ListNode l1){
-
         if (l1==null) return null;
         ListNode pre = l1;
         ListNode cur = l1.next;
         ListNode tmp;
-
         // l1,l2,l3,l4,l5,l6
         while (cur != null){
             tmp = cur.next;// 保存下一个节点，一开始就是第三个节点
@@ -206,6 +224,87 @@ class TwoListAdd {
         }
         l1.next = null;// 翻转后列表的尾部是空的
         return pre;
+    }
+
+    /**
+     给定一个链表，旋转链表，将链表每个节点向右移动 k 个位置，其中 k 是非负数。
+     示例 1:
+     输入: 1->2->3->4->5->NULL, k = 2
+     输出: 4->5->1->2->3->NULL
+     解释:
+     向右旋转 1 步: 5->1->2->3->4->NULL
+     向右旋转 2 步: 4->5->1->2->3->NULL
+     示例 2:
+     输入: 0->1->2->NULL, k = 4
+     输出: 2->0->1->NULL
+     解释:
+     向右旋转 1 步: 2->0->1->NULL
+     向右旋转 2 步: 1->2->0->NULL
+     向右旋转 3 步: 0->1->2->NULL
+     向右旋转 4 步: 2->0->1->NULL
+     * @param head
+     * @param k
+     * @return
+     */
+    public static ListNode rotateRight(ListNode head, int k) {
+        ListNode cur = head,newHead;
+        int len = 0,mod=0;
+        while (cur!=null){
+            cur = cur.next;
+            len += 1;
+        }
+        if (len<=1) return head;
+        // 求出长度，算出实际移动的位置
+        mod = k%len;
+        if (mod==0) return head;
+        newHead = cur = head;
+        while (mod>0){
+            newHead = newHead.next;
+            mod--;
+        }
+        while (newHead.next!=null){
+            newHead = newHead.next;
+            cur = cur.next;
+        }
+        // 到这里 cur.next 就是 新的头结点，newHead省下半截的就是尾节点
+        ListNode tail = newHead;
+        newHead = cur.next;
+        tail.next = head;
+        cur.next = null;
+        return newHead;
+    }
+
+    /**，先反转前n-k个元素，再反转后k个元素，然后再将整个数组反转，就能得到该数组旋转k个元素的结果了
+     *
+     * @param nums
+     * @param k
+     */
+    public static void rotateArray(int[] nums, int k) {
+        if (nums.length<2) return;
+        int mod = k%nums.length;if (mod==0) return;
+        reverse(nums, 0, nums.length - 1 - mod);
+        reverse(nums, nums.length - mod, nums.length - 1);
+        reverse(nums, 0, nums.length - 1);
+    }
+
+    private static void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            int tmp = nums[start];
+            nums[start++] = nums[end];
+            nums[end--] = tmp;
+        }
+    }
+
+    // 递归的旋转数组，容易超时
+    public static void rotateArrayRecurse(int[] nums, int k) {
+        if (k==0) return;
+        rotateArrayRecurse(nums,k-1);//先转k-1次，在转1次
+        int len = nums.length;
+        int tail = nums[len-1];
+        for (int i = len-1; i > 0; i--) {
+            nums[i] = nums[i-1];
+        }
+        nums[0] = tail;
     }
 
     /**

@@ -144,6 +144,81 @@ class RotateMatrix {
 
     }
 
+    /**
+     给定一个 m x n 的矩阵，如果一个元素为 0，则将其所在行和列的所有元素都设为 0。请使用原地算法。
+     示例 1:
+     输入:
+     [
+         [1,1,1],
+         [1,0,1],
+         [1,1,1]
+     ]
+     输出:
+     [
+         [1,0,1],
+         [0,0,0],
+         [1,0,1]
+     ]
+     示例 2:
+     输入:
+     [
+         [0,1,2,0],
+         [3,4,5,2],
+         [1,3,1,5]
+     ]
+     输出:
+     [
+         [0,0,0,0],
+         [0,4,5,0],
+         [0,3,1,0]
+     ]
+     进阶:
+     一个直接的解决方案是使用  O(mn) 的额外空间，但这并不是一个好的解决方案。// 直接全部复制即可
+     一个简单的改进方案是使用 O(m + n) 的额外空间，但这仍然不是最好的解决方案。//声明两个数组，记录需要置零的行与列
+     你能想出一个常数空间的解决方案吗？//
+
+     实际上，我们只需要直到哪些行，哪些列需要被置0就行了，最简单的方法就是建两个大小分别为M和N的数组，来记录哪些行哪些列应该被置0。
+     那有没有可能不用额外空间呢？我们其实可以借用原矩阵的首行和首列来存储这个信息。
+     这个方法的缺点在于，如果我们直接将0存入首行或首列来表示相应行和列要置0的话，我们很难判断首行或者首列自己是不是该置0。
+     这里我们用两个boolean变量记录下首行和首列原本有没有0，然后在其他位置置完0后，再单独根据boolean变量来处理首行和首列，就避免了干扰的问题。
+
+     就像那个数组去重 removeDuplicates 一样，可以直接利用已有空间
+     * @param matrix
+     */
+    public static void setZeroes(int[][] matrix) {
+        if(matrix.length == 0) return;
+        boolean firstRowZero = false, firstColZero = false;
+        // 记录哪些行哪些列需要置0，并判断首行首列是否需要置0
+        for(int i = 0; i < matrix.length; i++){
+            for(int j = 0; j < matrix[0].length; j++){
+                if(i != 0 && j != 0 && matrix[i][j] == 0){
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                } else if (matrix[i][j] == 0){
+                    // 如果首行或首列出现0，则标记其需要置0，否则沿用上次值
+                    firstRowZero = i == 0 ? true : firstRowZero;
+                    firstColZero = j == 0 ? true : firstColZero;
+                }
+            }
+        }
+        // 将除首行首列的位置置0
+        for(int i = 1; i < matrix.length; i++){
+            for(int j = 1; j < matrix[0].length; j++){
+                if(matrix[0][j] == 0 || matrix[i][0] == 0){
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+        // 如果必要，将首列置0
+        for(int i = 0; firstColZero && i < matrix.length; i++){
+            matrix[i][0] = 0;
+        }
+        // 如果必要，将首行置0
+        for(int j = 0; firstRowZero && j < matrix[0].length; j++){
+            matrix[0][j] = 0;
+        }
+    }
+
     // 感受：新鲜概念的理解与使用
     public static void main (String ...args){
 //        int[][] input = {

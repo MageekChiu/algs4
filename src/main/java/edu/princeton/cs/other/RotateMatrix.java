@@ -3,6 +3,8 @@ package edu.princeton.cs.other;
 import java.util.LinkedList;
 import java.util.List;
 
+import static java.lang.System.out;
+
 /**
  给定一个包含 m x n 个元素的矩阵（m 行, n 列），请按照顺时针螺旋顺序，返回矩阵中的所有元素。
  示例 1:
@@ -219,6 +221,59 @@ class RotateMatrix {
         }
     }
 
+    /**
+     有序矩阵搜索
+     编写一个高效的算法来判断 m x n 矩阵中，是否存在一个目标值。该矩阵具有如下特性：
+     每行中的整数从左到右按升序排列。
+     每行的第一个整数大于前一行的最后一个整数。
+     示例 1:
+     输入:
+     matrix = [
+         [1,   3,  5,  7],
+         [10, 11, 16, 20],
+         [23, 30, 34, 50]
+     ]
+     target = 3
+     输出: true
+     示例 2:
+
+     输入:
+     matrix = [
+         [1,   3,  5,  7],
+         [10, 11, 16, 20],
+         [23, 30, 34, 50]
+     ]
+     target = 13
+     输出: false
+     * @param matrix
+     * @param target
+     * @return
+     */
+    public static boolean searchMatrix(int[][] matrix, int target) {
+        boolean result = false;
+        int m = matrix.length;
+        if (m<1) return false;
+        int n = matrix[0].length;
+        if (n<1) return false;
+        for (int i = 0; i < m && !result; i++) {
+            if (matrix[i][n-1]<target) continue;//比最大值大，找下一行
+            if (matrix[i][0]>target) break;//比最小值小，无解
+            int l = 0,r = n-1;
+            while (l<=r){
+                int middle = l+(r-l)/2;
+                if (matrix[i][middle]==target){
+                    result = true;
+                    break;
+                }else if(matrix[i][middle]<target){
+                    l = middle+1;
+                }else {
+                    r = middle-1;
+                }
+            }
+        }
+        return result;
+    }
+
     // 感受：新鲜概念的理解与使用
     public static void main (String ...args){
 //        int[][] input = {
@@ -253,14 +308,26 @@ class RotateMatrix {
 //                { 7, 8, 9 }
 //        };
 //        out.println(spiralOrder(input));
-
-        int[][] a = generateMatrix(3);
-        for (int[] ints : a) {
-            for (int anInt : ints) {
-                System.out.print(anInt+",");
-            }
-            System.out.println();
-        }
+//
+//        int[][] a = generateMatrix(3);
+//        for (int[] ints : a) {
+//            for (int anInt : ints) {
+//                System.out.print(anInt+",");
+//            }
+//            System.out.println();
+//        }
+        int[][] input = {
+                { 1, 2, 3 },
+                { 4, 5, 6 },
+                { 7, 8, 9 }
+        };
+        int[][] input1 = {
+                { 1, 2, 5, 7 },
+                { 8, 10, 12, 16 },
+                { 24,22,34,56 }
+        };
+        out.println(searchMatrix(input,0));
+        out.println(searchMatrix(input1,34));
 
 
 

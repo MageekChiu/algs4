@@ -1,7 +1,6 @@
 package edu.princeton.cs.other;
 
-import static java.lang.System.out;
-
+import edu.princeton.cs.other.DeleteKNode.ListNode;
 /**
  数组去重
  给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。
@@ -48,6 +47,26 @@ import static java.lang.System.out;
  for (int i = 0; i < len; i++) {
  print(nums[i]);
  }
+
+ ------------------------------------------------------------------------------------------------------------
+
+ 给定一个排序链表，删除所有含有重复数字的节点，只保留原始链表中 没有重复出现 的数字。
+ 示例 1:
+ 输入: 1->2->3->3->4->4->5
+ 输出: 1->2->5
+ 示例 2:
+ 输入: 1->1->1->2->3
+ 输出: 2->3
+
+ ------------------------------------------------------------------------------------------------------------
+ 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。
+ 示例 1:
+ 输入: 1->1->2
+ 输出: 1->2
+ 示例 2:
+ 输入: 1->1->2->3->3
+ 输出: 1->2->3
+
  * @author Mageek Chiu
  */
 class DeDuplicateArray {
@@ -99,14 +118,84 @@ class DeDuplicateArray {
         return i+1;
     }
 
+    /**
+
+     给定一个排序链表，删除所有含有重复数字的节点，只保留原始链表中 没有重复出现 的数字。
+     示例 1:
+     输入: 1->2->3->3->4->4->5
+     输出: 1->2->5
+     示例 2:
+     输入: 1->1->1->2->3
+     输出: 2->3
+
+     * 新建一个哨兵节点，值为-1.
+     * 如果当前节点有重复，就删除节点指直到不重复的，将当前节点的前一个节点的指针指向不重复的，保持链表不断。
+     * @param head
+     * @return
+     */
+    public static ListNode deleteDuplicates(ListNode head) {
+        if(head==null||head.next==null)
+            return head;
+        ListNode p=head;
+        ListNode sentinel=new ListNode(-1);
+        sentinel.next=head;
+        ListNode pre=sentinel;
+        while(p!=null&&p.next!=null){
+            if(p.val!=p.next.val){
+                pre=p;
+            }else{
+                while(p.next!=null&&p.val==p.next.val)
+                    p=p.next;
+                pre.next=p.next;
+            }
+            p=p.next;
+        }
+        return sentinel.next;
+
+    }
+
+    public static ListNode deleteDuplicates1(ListNode head) {
+        if(head == null || head.next == null)  return head;
+
+        ListNode p = head;
+        ListNode q = p.next;
+        while(p!=null && q != null){
+            while(q != null && p.val == q.val){
+                //当p和下一个q相等时，往后移动q
+                q = q.next;
+            }
+            p.next = q;
+            p = q;
+            if(p !=null){
+                q = p.next;
+            }
+
+        }
+        return head;
+    }
+
     // 感受：
     public static void main (String ...args){
 //        int[] nums = {0,0,1,1,1,2,2,3,3,4};//
-        int[] nums = {1,1,1,2,2,3};//
+//        int[] nums = {1,1,1,2,2,3};//
 //        out.println(removeDuplicates(nums));
-        out.println(removeDuplicates2(nums));
-        for (int num : nums) {
-            out.print(num+",");
+//        out.println(removeDuplicates2(nums));
+//        for (int num : nums) {
+//            out.print(num+",");
+//        }
+
+        DeleteKNode.ListNode a = new DeleteKNode.ListNode(1);
+        DeleteKNode.ListNode b = new DeleteKNode.ListNode(2);
+        DeleteKNode.ListNode c = new DeleteKNode.ListNode(2);
+        DeleteKNode.ListNode d = new DeleteKNode.ListNode(4);
+        DeleteKNode.ListNode e = new DeleteKNode.ListNode(6);
+        DeleteKNode.ListNode f = new DeleteKNode.ListNode(12);
+        a.next=b;b.next=c;c.next=d;d.next=e;e.next=f;f.next=null;
+
+        DeleteKNode.ListNode listNode = deleteDuplicates(a);
+        while (listNode!=null){
+            System.out.println(listNode.val);
+            listNode = listNode.next;
         }
     }
 }

@@ -97,8 +97,78 @@ class Permutation {
         return result;
     }
 
+    /**
+     给定两个整数 n 和 k，返回 1 ... n 中所有可能的 k 个数的组合。
+     示例:
+     输入: n = 4, k = 2
+     输出:
+     [
+         [2,4],
+         [3,4],
+         [2,3],
+         [1,2],
+         [1,3],
+         [1,4],
+     ]
+     */
+    public static List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> result = new LinkedList<>();
+        if (n>=2*k){// k 小于 n 的一半
+            result = combine2KLessThanN(n,k);
+            return result;
+        }
+        if (n==k){
+            result = combine2KLessThanN(n,k);
+            return  result;
+        }
+        List<List<Integer>> tmp = combine2KLessThanN(n,n-k);
+        for (List<Integer> list : tmp) {
+            List<Integer> list1 = new LinkedList<>();
+            for (int i=1;i<=n;i++){
+                if (!list.contains(i)){
+                    list1.add(i);
+                }
+            }
+            result.add(list1);
+        }
+        return result;
 
-    // 感受：递归思想的应用
+    }
+
+    public static List<List<Integer>> combine2KLessThanN(int n, int k) {
+        List<List<Integer>> result = new LinkedList<>();
+        Set<List<Integer>> resultSet = new HashSet<>();
+        if (k==0) {// c n 0 = 1
+            return result;
+        }
+        if (k==1){
+            for (int i = 1;i<=n;i++){
+                int tmp = i;
+                resultSet.add(new ArrayList<Integer>(){{
+                    add(tmp);
+                }});
+            }
+        }
+        if (k>1){
+            List<List<Integer>> sub = combine(n,k-1);
+            for (List<Integer> list : sub) {
+                for (int i = 1;i<=n;i++){
+                    List<Integer> list1 = new ArrayList<>();
+                    list1.addAll(list);
+                    if (!list.contains(i)){//从剩下的当中选
+                        list1.add(i);
+                        Collections.sort(list1);//排序去重
+                        resultSet.add(list1);
+                    }
+                }
+            }
+        }
+        result.addAll(resultSet);
+        return result;
+    }
+
+
+        // 感受：递归思想的应用
     public static void main (String ...args){
 //        int[] nums1 = {1,2,3};
 //        out.print(permute(nums1));
@@ -106,20 +176,27 @@ class Permutation {
 //        int[] nums2 = {1,1,2};
 //        out.print(permuteUnique(nums2));
 
-        // 验证 set 能对 list 去重，值一样就视为重复
-        Set<List<Integer>> result = new HashSet<>();
-        result.add(new ArrayList<Integer>(){{
-            add(1);
-            add(2);
-            add(1);
-        }});
-        result.add(new ArrayList<Integer>(){{
-            add(1);
-            add(2);
-            add(1);
+//        // 验证 set 能对 list 去重，值一样就视为重复
+//        Set<List<Integer>> result = new HashSet<>();
+//        result.add(new ArrayList<Integer>(){{
 //            add(1);
-        }});
-        out.println(result.size());
+//            add(2);
+//            add(1);
+//        }});
+//        result.add(new ArrayList<Integer>(){{
+//            add(1);
+//            add(2);
+//            add(1);
+////            add(1);
+//        }});
+//        out.println(result.size());
 
+
+//        out.println(combine(4,2));
+//        out.println(combine(4,1));
+//        out.println(combine(4,3));
+        out.println(combine(20,16));
+//        out.println(combine(3,1));
+//        out.println(combine(1,1));
     }
 }

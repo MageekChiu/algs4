@@ -139,12 +139,29 @@ class TwoListAdd {
 //            resV = resV.next;
 //        }
 
-        // 旋转数组
-//        int[] nums = new int[]{1,2,3,4,5,6,7};
-        int[] nums = new int[]{1,2,3,4,5,6};
-        rotateArray(nums,2);
-        for (int num : nums) {
-            out.print(num+",");
+//        // 旋转数组
+////        int[] nums = new int[]{1,2,3,4,5,6,7};
+//        int[] nums = new int[]{1,2,3,4,5,6};
+//        rotateArray(nums,2);
+//        for (int num : nums) {
+//            out.print(num+",");
+//        }
+
+        // 旋转链表
+        ListNode a = new ListNode(2);
+        ListNode a2 = new ListNode(3);
+        ListNode a1 = new ListNode(4);
+        ListNode a3 = new ListNode(5);
+        ListNode a4 = new ListNode(3);
+        ListNode a5 = new ListNode(6);
+        ListNode a6 = new ListNode(1);
+        a.next=a2;a2.next=a1;a1.next = a3;a3.next = a4;a4.next = a5;a5.next=a6;a6.next=null;
+//        ListNode resV = partition(a,5);
+//        ListNode resV = partition(a6,5);
+        ListNode resV = partition(a5,5);
+        while (resV!=null){//遍历打印
+            out.print(resV.val+"->");
+            resV = resV.next;
         }
 
     }
@@ -368,8 +385,49 @@ class TwoListAdd {
         return pre;
     }
 
+    /**
+     给定一个链表和一个特定值 x，对链表进行分隔，使得所有小于 x 的节点都在大于或等于 x 的节点之前。
+     你应当保留两个分区中每个节点的初始相对位置。
+     示例:
+     输入: head = 1->4->3->2->5->2, x = 3
+     输出: 1->2->2->4->3->5
 
-
+     思路：就是把 <3 的元素按原始顺序挪到 secondHalf 前面去，secondHalf 是原始节点第一个>=3 的元素,也就是新链表的后半部分头结点
+     */
+    public static ListNode partition(ListNode head, int x) {
+        ListNode sentinel = new ListNode(x-10);//涉及链表的加一个哨兵节点一般是有用的的，比如这里就可以把头结点统一处理，不管这个secondHalfHead是不是头结点
+        sentinel.next = head;
+        if (head==null) return  null;//特殊情况
+        ListNode p = head,q = p.next,secondHalfHead,firstHalfTail;
+        if (p.val>=x){//头结点就是>=x的
+            firstHalfTail = sentinel;
+            secondHalfHead = p;
+        }else {
+            while (q!=null && q.val<x){
+                p = q;q = q.next;
+            }
+            if (q==null) return sentinel.next;//全部小于x,或者链表只有一个节点。两种情况都可以直接返回
+//        到这里q就是第一个 >=x 的元素,p是其前缀，后面的元素都要插p,q之间，也就是firstHalfTail secondHalfHead 之间
+            firstHalfTail = p;
+            secondHalfHead = q;
+        }
+        //可以从secondHalfHead开始遍历了
+        p = secondHalfHead;
+        q = p.next;
+        while (q!=null){
+            if (q.val<x){//q要往前挪
+                firstHalfTail.next = q;
+                firstHalfTail = q;//尾巴后移
+                p.next = q.next;//后半部分删除q
+                q = p.next;//指针后移
+            }else {//直接指针后移
+                p = q;
+                q = q.next;
+            }
+        }
+        firstHalfTail.next = secondHalfHead;//连上两个半边
+        return  sentinel.next;
+    }
 
 
 

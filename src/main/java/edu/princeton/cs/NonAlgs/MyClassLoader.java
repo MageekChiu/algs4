@@ -63,7 +63,7 @@ public class MyClassLoader extends ClassLoader {
         MyClassLoader loader = new MyClassLoader();
         Class c;
         try {
-            c = loader.loadClass("edu.princeton.cs.NonAlgs.String", false);
+            c = loader.loadClass("edu.princeton.cs.NonAlgs.MyString", false);
             Object o = c.newInstance();
 //            System.out.println(o);
             Method m = c.getMethod("show");

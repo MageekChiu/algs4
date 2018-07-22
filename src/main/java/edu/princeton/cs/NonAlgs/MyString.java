@@ -2,15 +2,15 @@ package edu.princeton.cs.NonAlgs;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-class String{
+class MyString{//叫String会使得本包下面的其他类都无法使用 java 原生String
     public char[] chars = new char[100];
     private AtomicInteger index = new AtomicInteger(0);
 
-    public String(char c){
+    public MyString(char c){
         chars[index.getAndIncrement()] = c;
     }
 
-    public String(){
+    public MyString(){
         chars[index.getAndIncrement()] = 'd';
         chars[index.getAndIncrement()] = 'e';
         chars[index.getAndIncrement()] = 'f';

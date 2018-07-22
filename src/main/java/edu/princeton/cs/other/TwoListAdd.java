@@ -147,22 +147,31 @@ class TwoListAdd {
 //            out.print(num+",");
 //        }
 
-        // 旋转链表
-        ListNode a = new ListNode(2);
-        ListNode a2 = new ListNode(3);
-        ListNode a1 = new ListNode(4);
-        ListNode a3 = new ListNode(5);
-        ListNode a4 = new ListNode(3);
-        ListNode a5 = new ListNode(6);
-        ListNode a6 = new ListNode(1);
-        a.next=a2;a2.next=a1;a1.next = a3;a3.next = a4;a4.next = a5;a5.next=a6;a6.next=null;
-//        ListNode resV = partition(a,5);
-//        ListNode resV = partition(a6,5);
-        ListNode resV = partition(a5,5);
-        while (resV!=null){//遍历打印
-            out.print(resV.val+"->");
-            resV = resV.next;
-        }
+//        // 旋转链表
+//        ListNode a = new ListNode(2);
+//        ListNode a2 = new ListNode(3);
+//        ListNode a1 = new ListNode(4);
+//        ListNode a3 = new ListNode(5);
+//        ListNode a4 = new ListNode(3);
+//        ListNode a5 = new ListNode(6);
+//        ListNode a6 = new ListNode(1);
+//        a.next=a2;a2.next=a1;a1.next = a3;a3.next = a4;a4.next = a5;a5.next=a6;a6.next=null;
+////        ListNode resV = partition(a,5);
+////        ListNode resV = partition(a6,5);
+//        ListNode resV = partition(a5,5);
+//        while (resV!=null){//遍历打印
+//            out.print(resV.val+"->");
+//            resV = resV.next;
+//        }
+        ListNode a = new ListNode(1);
+        ListNode a2 = new ListNode(2);a.next=a2;//a2.next=null;
+        ListNode a1 = new ListNode(4);a2.next=a1;
+        ListNode a3 = new ListNode(5);a1.next = a3;
+        ListNode a4 = new ListNode(4);a3.next = a4;
+        ListNode a5 = new ListNode(2);a4.next = a5;
+        ListNode a6 = new ListNode(1);a5.next=a6;
+        a6.next=null;
+        out.println(isPalindrome(a));
 
     }
 
@@ -427,6 +436,69 @@ class TwoListAdd {
         }
         firstHalfTail.next = secondHalfHead;//连上两个半边
         return  sentinel.next;
+    }
+
+    /**
+     请判断一个链表是否为回文链表。
+     示例 1:
+     输入: 1->2
+     输出: false
+     示例 2:
+     输入: 1->2->2->1
+     输出: true
+     进阶：
+     你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
+
+     思路：
+     可以用栈来解决,但是 2222这种不好解决，而且空间不是 1
+
+     可以 一遍求出长度，然后找出后半部分与前半部分，然后翻转一个半部分，然后直接对比
+
+     */
+    public static boolean isPalindrome(ListNode head) {
+//        Stack<Integer> stack = new Stack<>();
+//        while (head!=null){
+//            if (stack.isEmpty()){//空的直接入栈
+//                stack.push(head.val);
+//            }else {//非空
+//                int elm = stack.peek();
+//                if (elm==head.val){//相同 出栈
+//                    stack.pop();
+//                }else {
+//                    stack.push(head.val);
+//                }
+//            }
+//            head = head.next;
+//        }
+//        return stack.isEmpty();
+
+        ListNode cur = head;
+        int len = 0;
+        while (cur!=null){
+            cur = cur.next;
+            len += 1;
+        }
+        if (len<2) return true;//排除特殊
+        int half = len%2==0 ? len/2+1 : (len+1)/2+1;
+
+        cur = head;
+        int count= 1;
+        while (count!=half){
+            count += 1;
+            cur = cur.next;
+        }
+
+        ListNode secondHalf = revertList(cur);
+
+        cur = head;
+        ListNode cur1 = secondHalf;
+
+        while (cur!=null&&cur1!=null){
+            if (cur.val!=cur1.val) return false;
+            cur = cur.next;
+            cur1 = cur1.next;
+        }
+        return true;
     }
 
 

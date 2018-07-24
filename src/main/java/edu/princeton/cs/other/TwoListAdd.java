@@ -1,5 +1,7 @@
 package edu.princeton.cs.other;
 
+import java.util.Stack;
+
 import static java.lang.System.out;
 
 /**
@@ -86,10 +88,10 @@ class TwoListAdd {
     // 感受： 基本数学概念，然后就是各种特殊情况的考虑
     // 有联系的多考虑递归
     public static void main (String ...args){
-//        ListNode a = new ListNode(2);
-//        ListNode a1 = new ListNode(4);
-//        ListNode a2 = new ListNode(3);
-//        a.next=a1;a1.next=a2;
+        ListNode a = new ListNode(2);
+        ListNode a1 = new ListNode(4);
+        ListNode a2 = new ListNode(3);
+        a.next=a1;a1.next=a2;
 
 //        ListNode b = new ListNode(5);
 //        ListNode b1 = new ListNode(6);
@@ -103,7 +105,13 @@ class TwoListAdd {
 //            res = res.next;
 //        }
 
-//        out.println();
+        // 翻转列表指定间隙
+        ListNode resV = reverseBetween(a,2,3);
+        while (resV!=null){//遍历打印
+            out.print(resV.val+"->");
+            resV = resV.next;
+        }
+        out.println();
 
 //        // 翻转列表
 //        ListNode resV = revertList(a);
@@ -163,15 +171,16 @@ class TwoListAdd {
 //            out.print(resV.val+"->");
 //            resV = resV.next;
 //        }
-        ListNode a = new ListNode(1);
-        ListNode a2 = new ListNode(2);a.next=a2;//a2.next=null;
-        ListNode a1 = new ListNode(4);a2.next=a1;
-        ListNode a3 = new ListNode(5);a1.next = a3;
-        ListNode a4 = new ListNode(4);a3.next = a4;
-        ListNode a5 = new ListNode(2);a4.next = a5;
-        ListNode a6 = new ListNode(1);a5.next=a6;
-        a6.next=null;
-        out.println(isPalindrome(a));
+
+//        ListNode a = new ListNode(1);
+//        ListNode a2 = new ListNode(2);a.next=a2;//a2.next=null;
+//        ListNode a1 = new ListNode(4);a2.next=a1;
+//        ListNode a3 = new ListNode(5);a1.next = a3;
+//        ListNode a4 = new ListNode(4);a3.next = a4;
+//        ListNode a5 = new ListNode(2);a4.next = a5;
+//        ListNode a6 = new ListNode(1);a5.next=a6;
+//        a6.next=null;
+//        out.println(isPalindrome(a));
 
     }
 
@@ -245,12 +254,72 @@ class TwoListAdd {
         while (cur != null){
             tmp = cur.next;// 保存下一个节点，一开始就是第三个节点
             cur.next = pre;// 反向
-            pre = cur;// 反向
+            pre = cur;// 反向后左半边的头结点
             cur = tmp;// 移动当前指针至下一个节点
         }
-        l1.next = null;// 翻转后列表的尾部是空的
+        l1.next = null;// 翻转后列表的尾部要是空的才行
         return pre;
     }
+
+    /**
+     反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。
+     说明:
+     1 ≤ m ≤ n ≤ 链表长度。
+     示例:
+     输入: 1->2->3->4->5->NULL, m = 2, n = 4
+     输出: 1->4->3->2->5->NULL
+
+     感受，要调整一个链表中的节点，一般需要前驱或者后缀，有时两个同时需要
+     将m-n的结点依次入栈，并标记与入栈结点相邻的前后两个结点pfirst和psecond
+     链表——将单链表从m到n的结点位置翻转 - CSDN博客: https://blog.csdn.net/jingsuwen1/article/details/51352598
+     */
+    public static ListNode reverseBetween(ListNode head, int m, int n) {
+        if(head==null) return null;
+        if(m==n) return head;
+        Stack<ListNode> stack=new Stack<>();
+        //将m-n的结点入栈，将前后相邻的两个结点标记;
+        int num=1;
+        ListNode pfirst=null;
+        ListNode psecond=null;
+        ListNode p=head;
+        //特殊情况，m==1时，头结点变更;
+        if(m==1)
+            pfirst=null;
+        for(;num<=n;num++)
+        {
+            //记录pfirst;
+            if(num<m)
+            {
+                if(num==m-1)
+                {
+                    pfirst=p;
+                }
+                p=p.next;
+            }
+            else if(num>=m&&num<=n)
+            {
+                stack.push(p);
+                p=p.next;
+            }
+        }
+        //记录psecond,psecond的一般情况仍适用于n=length of list的特殊情况;
+        psecond=p;
+        //开始操作链表;
+        if(pfirst==null)
+        {
+            head=stack.pop();
+            pfirst=head;
+        }
+        while(!stack.empty())
+        {
+            pfirst.next=stack.pop();
+            pfirst=pfirst.next;
+        }
+        pfirst.next=psecond;
+        return head;
+    }
+
+
 
     /**
      给定一个链表，旋转链表，将链表每个节点向右移动 k 个位置，其中 k 是非负数。

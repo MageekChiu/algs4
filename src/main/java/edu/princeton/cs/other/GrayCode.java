@@ -144,7 +144,7 @@ class GrayCode {
         return r;
     }
 
-    
+
 
     // 感受：格雷码，典型的递归应用，递归和DP其实就是数学归纳法思想的应用
     public static void main (String ...args){

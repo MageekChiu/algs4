@@ -166,6 +166,94 @@ class JumpGame {
         return ret;
     }
 
+    /**
+     给定一个字符串 S 和一个字符串 T，计算在 S 的子序列中 T 出现的个数。
+     一个字符串的一个子序列是指，通过删除一些（也可以不删除）字符且不干扰剩余字符相对位置所组成的新字符串。（例如，"ACE" 是 "ABCDE" 的一个子序列，而 "AEC" 不是）
+     示例 1:
+     输入: S = "rabbbit", T = "rabbit"
+     输出: 3
+     解释:
+     如下图所示, 有 3 种可以从 S 中得到 "rabbit" 的方案。
+     (上箭头符号 ^ 表示选取的字母)
+     rabbbit
+     ^^^^ ^^
+     rabbbit
+     ^^ ^^^^
+     rabbbit
+     ^^^ ^^^
+     示例 2:
+     输入: S = "babgbag", T = "bag"
+     输出: 5
+     解释:
+     如下图所示, 有 5 种可以从 S 中得到 "bag" 的方案。
+     (上箭头符号 ^ 表示选取的字母)
+     babgbag
+     ^^ ^
+     babgbag
+     ^^    ^
+     babgbag
+     ^    ^^
+     babgbag
+       ^  ^^
+     babgbag
+         ^^^
+     思路，首先就会想到深度优先搜索，回溯法
+     暴力搜索需要 n 的 m 次方，
+     回溯法好像和暴搜区别不大，想着想着就想到有重复结果，所以可以考虑一下DP
+     但是DP也会涉及递归？？
+
+     不出所料，回溯法超时了
+     还是要考虑DP
+
+     令dp[i][j]表示字符串s[0 : i-1]中和t[0 : j-1]相等的子序列个数，最终要求解的是dp[n][m]
+     另外需要考虑的是，假设字符串t为空，即m为0，那么dp[i][0]都应该为1，因为只需要将s中所有字符都删掉即可
+     求dp[i][j]的方法是
+     如果s[i - 1] == t[j - 1]，说明当前位置匹配，那么dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j]，
+            表示可以认为当前位置匹配计算个数和，也可以不认为当前位置匹配而在s前面寻找匹配位置
+     如果s[i - 1] != t[j - 1]，那么就老老实实的dp[i][j] = dp[i - 1][j]从s前面寻找匹配位置
+
+     */
+    public static int numDistinct(String s, String t) {
+        return numDistinct(s,0,t,0);
+    }
+
+    public static int numDistinct(String s,int sStrat, String t,int tChar) {
+        int n = s.length(),m = t.length(),result = 0;
+        if ( n<m || m<1 ) return 0;
+        for(int i = sStrat;i<n;i++){
+            if (s.charAt(i)==t.charAt(tChar)){//找到当前字符
+                if (tChar==m-1){//找到一个解了,可以继续for循环找下一个解
+                    result += 1;
+                }else {//只找到解的一个部分，递归查找
+                    result += numDistinct(s,i+1,t,tChar+1);
+                }
+            }
+        }
+        return result;
+    }
+
+    public static int numDistinctDP(String s, String t) {
+        int n = s.length(),m = t.length();
+        if ( n<m || m<1 ) return 0;
+        int[][] dp = new int[n+1][m+1];
+        /* 最重要的是这里，所有迭代的动态规划最不好理解的也都是对dp设置初值
+         * 由于本题只要t为空，那么可以将s中所有字符删掉就获得t，所以可以为1 */
+        for(int i = 0; i <= n; ++i)
+            dp[i][0] = 1;
+        for(int i = 1; i <= n; ++i)
+        {
+            for(int j = 1; j <= m; ++j)
+            {
+                /* 根据是否相等执行不同操作，因为此时需要匹配t[0 : j]，而只有相等是才可以允许只匹配t[0 : j-1] */
+                if(s.charAt(i - 1) == t.charAt(j - 1))
+                    dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
+                else
+                    dp[i][j] = dp[i - 1][j];
+            }
+        }
+        return dp[m][m];
+    }
+
 
 
     // 感受：
@@ -194,9 +282,17 @@ class JumpGame {
 //        out.println(canJump(nums));
 
 
-        int[] nums = {2,3,1,1,4};//2
+//        int[] nums = {2,3,1,1,4};//2
 //        int[] nums = {0};//0
-        System.out.println(jump(nums));
+//        System.out.println(jump(nums));
+
+
+//        System.out.println(numDistinct("babgbag","bag"));//5
+//        System.out.println(numDistinct("rabbbit","rabbit"));//3
+//        System.out.println(numDistinct("usstctc","ustc"));//6
+//        System.out.println(numDistinct("ustc","ustcc"));//0
+//        System.out.println(numDistinct("ustc","ustk"));//0
+        System.out.println(numDistinct("adbdadeecadeadeccaeaabdabdbcdabddddabcaaadbabaaedeeddeaeebcdeabcaaaeeaeeabcddcebddebeebedaecccbdcbcedbdaeaedcdebeecdaaedaacadbdccabddaddacdddc", "bcddceeeebecbc"));//0
 
     }
 }

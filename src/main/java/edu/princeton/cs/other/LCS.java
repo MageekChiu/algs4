@@ -1,7 +1,5 @@
 package edu.princeton.cs.other;
 
-import edu.princeton.cs.algs4.Stack;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -308,9 +306,53 @@ class LCS {
         return isPalindrome(s,0,s.length()-1);
     }
 
+    // 字符串回文
     public static boolean isPalindrome(String s,int i,int j) {
         if (i >= j) return true;
         return s.charAt(i) == s.charAt(j) && isPalindrome(s,i + 1, j - 1);
+    }
+
+
+    // 给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。
+    // "A man, a plan, a canal: Panama" true
+    // "race a car"  false
+    public static boolean isPalindromeCharOnly(String s) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            if (c>='0' && c<='9' || c>='a' && c<='z' || c>='A' && c<='Z' ){
+                sb.append(c);
+            }
+        }
+        String StringOnly = sb.toString().toLowerCase();
+        return isPalindrome(StringOnly,0,StringOnly.length()-1);
+    }
+
+    /**
+     给定一个非空字符串 s，最多删除一个字符。判断是否能成为回文字符串。
+     示例 1:
+     输入: "aba"
+     输出: True
+     示例 2:
+     输入: "abca"
+     输出: True
+     解释: 你可以删除c字符。
+     注意:
+     字符串只包含从 a-z 的小写字母。字符串的最大长度是50000。
+     */
+    public static boolean validPalindrome(String s) {
+        return isPalindrome1(s,0,s.length()-1,0);
+    }
+
+    // 字符串回文最多删除一个字符
+    public static boolean isPalindrome1(String s,int i,int j,int deleteNumber) {
+        if (i >= j) return true;
+        if( s.charAt(i) == s.charAt(j)){
+            return  isPalindrome1(s,i + 1, j - 1,deleteNumber);
+        }else {
+            deleteNumber++;
+            if (deleteNumber>1) return false;
+            return  isPalindrome1(s,i+1,j,deleteNumber) || isPalindrome1(s,i,j-1,deleteNumber);//尝试删除两边的
+        }
     }
 
     /**
@@ -437,11 +479,15 @@ class LCS {
 //        out.println(isPalindrome(132441));
 //        out.println(isPalindrome(-121));
 
-        out.println(isPalindromeWithoutString(121));
-        out.println(isPalindromeWithoutString(1221));
-        out.println(isPalindromeWithoutString(1345431));
-        out.println(isPalindromeWithoutString(132441));
-        out.println(isPalindromeWithoutString(-121));
+//        out.println(isPalindromeWithoutString(121));
+//        out.println(isPalindromeWithoutString(1221));
+//        out.println(isPalindromeWithoutString(1345431));
+//        out.println(isPalindromeWithoutString(132441));
+//        out.println(isPalindromeWithoutString(-121));
+
+//        out.println(isPalindromeCharOnly("0P"));
+//        out.println(validPalindrome("0P"));
+        out.println(validPalindrome("0P011"));
     }
 
 }

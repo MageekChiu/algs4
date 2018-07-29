@@ -275,8 +275,8 @@ class TwoListAdd {
      说明:
      1 ≤ m ≤ n ≤ 链表长度。
      示例:
-     输入: 1->2->3->4->5->NULL, m = 2, n = 4
-     输出: 1->4->3->2->5->NULL
+     输入: 1->2->3->4->5->null, m = 2, n = 4
+     输出: 1->4->3->2->5->null
 
      感受，要调整一个链表中的节点，一般需要前驱或者后缀，有时两个同时需要
      将m-n的结点依次入栈，并标记与入栈结点相邻的前后两个结点pfirst和psecond
@@ -333,19 +333,19 @@ class TwoListAdd {
     /**
      给定一个链表，旋转链表，将链表每个节点向右移动 k 个位置，其中 k 是非负数。
      示例 1:
-     输入: 1->2->3->4->5->NULL, k = 2
-     输出: 4->5->1->2->3->NULL
+     输入: 1->2->3->4->5->null, k = 2
+     输出: 4->5->1->2->3->null
      解释:
-     向右旋转 1 步: 5->1->2->3->4->NULL
-     向右旋转 2 步: 4->5->1->2->3->NULL
+     向右旋转 1 步: 5->1->2->3->4->null
+     向右旋转 2 步: 4->5->1->2->3->null
      示例 2:
-     输入: 0->1->2->NULL, k = 4
-     输出: 2->0->1->NULL
+     输入: 0->1->2->null, k = 4
+     输出: 2->0->1->null
      解释:
-     向右旋转 1 步: 2->0->1->NULL
-     向右旋转 2 步: 1->2->0->NULL
-     向右旋转 3 步: 0->1->2->NULL
-     向右旋转 4 步: 2->0->1->NULL
+     向右旋转 1 步: 2->0->1->null
+     向右旋转 2 步: 1->2->0->null
+     向右旋转 3 步: 0->1->2->null
+     向右旋转 4 步: 2->0->1->null
      * @param head
      * @param k
      * @return
@@ -421,8 +421,8 @@ class TwoListAdd {
 
      利用递归的思想，依次交换链表中的节点对。具体对于每个节点来说：
 
-     若该节点为NULL，则直接返回NULL
-     若该节点的下一个节点为NULL，则直接返回该节点
+     若该节点为null，则直接返回null
+     若该节点的下一个节点为null，则直接返回该节点
      否则交换该节点与下一个节点，利用辅助指针记录该节点的下一个节点，并递归的交换接下来的节点对
 
      非递归的思路
@@ -693,5 +693,65 @@ class TwoListAdd {
     }
 
 
+    /**
+     给定一个单链表 L：L0→L1→…→Ln-1→Ln ，
+     将其重新排列后变为： L0→Ln→L1→Ln-1→L2→Ln-2→…
+     你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
+     示例 1:
+     给定链表 1->2->3->4, 重新排列为 1->4->2->3.
+     示例 2:
+     给定链表 1->2->3->4->5, 重新排列为 1->5->2->4->3.
+
+     思路1：和翻转链表进行归并，一边选一次  O(n)
+     1 2 3 4
+     4 3 2 1          1 3 2 3 就行了
+     1 2 3 4 5
+     5 4 3 2 1        1 5 2 4 3 就行了
+
+     思路2：直接暴力解决，要n^2
+
+     思路3：第一步，将链表一分为二，用到快慢指针；第二步，反转第二部分，反转链表是很重要的根基；第三步，将两链表接起来
+     使用快慢指针将链表分成两段，采用这种方式会导致在链表结点个数为奇数的情况下，后半段的个数比前半段多一个。
+     前半段一preSlow维结束，后半段一slow开始。所以在第三步将两子链表连接起来的时候，要注意判断反转以后以newBeg开始的后半段是否已经结束，
+     没有，则连接上剩余部分即可。
+     */
+    public void reorderList(ListNode head) {
+        if(head==null||head.next==null)
+            return;
+        //分成两段
+        ListNode preSlow=null;
+        ListNode slow=head,fast=head;
+        while(fast!=null && fast.next!=null) {
+            preSlow=slow;
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        preSlow.next=null; //前半段
+
+        //反转后半段
+        ListNode newBeg=slow;
+        ListNode last=newBeg.next;
+        while(last!=null) {
+            ListNode temp=last.next;
+            last.next=newBeg;
+            newBeg=last;
+            last=temp;
+        }
+        slow.next=null;
+
+        //合并
+        fast=head;
+        preSlow=null;
+        while(fast!=null){ //注：以前半段为条件
+            ListNode tem=newBeg.next;
+            newBeg.next=fast.next;
+            fast.next=newBeg;
+            fast=newBeg.next;
+            preSlow=newBeg;
+            newBeg=tem;
+        }
+        if(newBeg !=null)   //因节点个数为奇数时，后段比前段多一个，所以最后要判断
+            preSlow.next=newBeg;
+    }
 
 }

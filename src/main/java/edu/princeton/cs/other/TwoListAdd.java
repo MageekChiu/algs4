@@ -525,6 +525,67 @@ class TwoListAdd {
     }
 
     /**
+     在 O(n log n) 时间复杂度和常数级空间复杂度下，对链表进行排序。
+     示例 1:
+     输入: 4->2->1->3
+     输出: 1->2->3->4
+     示例 2:
+     输入: -1->5->3->4->0
+     输出: -1->0->3->4->5
+
+     思路1：可以转换为数组进行快排，排完后恢复链表即可，但是为了满足内存要求，需要在边转换边删除
+     思路2：直接上归并排序,链表归并排序，只需要O(1)空间，数组要O(n)
+     */
+    public ListNode sortList(ListNode head) {
+        //  0个节点 ||  1个节点
+        if (head == null || head.next == null)
+            return head;
+        //  >= 2个节点
+        ListNode first = head, second = null, mid = getMid(head);
+        second = mid.next;
+        mid.next = null;  //将链表分为两段！！！！
+        //递归
+        first = sortList(first);
+        second = sortList(second);
+        return merge(first, second);
+    }
+    //排序
+    ListNode merge(ListNode first, ListNode second) {
+        if (first == null)
+            return second;
+        if (second == null)
+            return first;
+        ListNode res = new ListNode(0);
+        ListNode curr = res;//控制新链表顺序的point
+        while (first != null && second != null) {
+            if (first.val < second.val) {
+                curr.next = first;
+                curr = curr.next;
+                first = first.next;
+            } else {
+                curr.next = second;
+                curr = curr.next;
+                second = second.next;
+            }
+        }
+        // 连上较长链多出来的
+        if (first != null)  curr.next = first;
+        if (second != null) curr.next = second;
+        return res.next;
+    }
+
+    //将链表平分为两段，返回第一段末尾   例如：5个点返回2号点，6个点返回3号点
+    ListNode getMid(ListNode head) {
+        ListNode slow = head, fast = head.next;
+        while (fast!=null&&fast.next!=null) {
+            slow=slow.next;//一次走一步
+            fast=fast.next.next;//一次走两步
+        }
+        return slow;
+    }
+
+
+    /**
      给定一个链表和一个特定值 x，对链表进行分隔，使得所有小于 x 的节点都在大于或等于 x 的节点之前。
      你应当保留两个分区中每个节点的初始相对位置。
      示例:

@@ -39,7 +39,7 @@ import static java.lang.System.out;
 
  * @author Mageek Chiu
  */
-class ValidBrackets {
+class BracketsValid {
 
     /**
      * 括号是否有效, O(n) 复杂度

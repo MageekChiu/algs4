@@ -115,7 +115,7 @@ class BracketsGeneration {
      * @param leftRem 左括号剩余数量
      * @param rightRem 右括号剩余数量
      * @param buffer 放括号的字符数组
-     * @param count 插入括号的位置
+     * @param count 当前应该插入括号的位置
      */
     private static void make(List<String> list, int leftRem, int rightRem, char[] buffer, int count) {
         if(leftRem < 0 || rightRem < leftRem) {   // 无效输入
@@ -129,7 +129,7 @@ class BracketsGeneration {
                 buffer[count] = '(';
                 make(list, leftRem - 1, rightRem, buffer, count + 1);
             }
-            if(rightRem > leftRem) { // 右括号比左括号更多就可以加入右括号
+            if(rightRem > leftRem) { // 右括号比左括号更多就可以加入右括号，右括号剩的必须必左括号多才合法
                 buffer[count] = ')';
                 make(list, leftRem, rightRem - 1, buffer, count + 1);
             }

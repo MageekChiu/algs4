@@ -88,10 +88,19 @@ class TwoListAdd {
     // 感受： 基本数学概念，然后就是各种特殊情况的考虑
     // 有联系的多考虑递归
     public static void main (String ...args){
-        ListNode a = new ListNode(2);
-        ListNode a1 = new ListNode(4);
-        ListNode a2 = new ListNode(3);
-        a.next=a1;a1.next=a2;
+        ListNode a = new ListNode(4);
+        ListNode a1 = new ListNode(2);
+        ListNode a2 = new ListNode(1);
+        ListNode a3 = new ListNode(3);
+        a.next=a1;a1.next=a2;a2.next=a3;a3.next=null;
+
+
+        // 链表插入排序
+        ListNode res = insertionSortList(a);//
+        while (res!=null){//遍历打印
+            out.print(res.val+"->");
+            res = res.next;
+        }
 
 //        ListNode b = new ListNode(5);
 //        ListNode b1 = new ListNode(6);
@@ -105,13 +114,13 @@ class TwoListAdd {
 //            res = res.next;
 //        }
 
-        // 翻转列表指定间隙
-        ListNode resV = reverseBetween(a,2,3);
-        while (resV!=null){//遍历打印
-            out.print(resV.val+"->");
-            resV = resV.next;
-        }
-        out.println();
+//        // 翻转列表指定间隙
+//        ListNode resV = reverseBetween(a,2,3);
+//        while (resV!=null){//遍历打印
+//            out.print(resV.val+"->");
+//            resV = resV.next;
+//        }
+//        out.println();
 
 //        // 翻转列表
 //        ListNode resV = revertList(a);
@@ -461,6 +470,58 @@ class TwoListAdd {
             head = t;
         }
         return pre;
+    }
+
+    /**
+     对链表进行插入排序。
+     插入排序的动画演示如上。从第一个元素开始，该链表可以被认为已经部分排序（用黑色表示）。
+     每次迭代时，从输入数据中移除一个元素（用红色表示），并原地将其插入到已排好序的链表中。
+     插入排序算法：
+         插入排序是迭代的，每次只移动一个元素，直到所有元素可以形成一个有序的输出列表。
+         每次迭代中，插入排序只从输入数据中移除一个待排序的元素，找到它在序列中适当的位置，并将其插入。
+        重复直到所有输入数据插入完为止。
+     示例 1：
+     输入: 4->2->1->3
+     输出: 1->2->3->4
+     示例 2：
+     输入: -1->5->3->4->0
+     输出: -1->0->3->4->5
+     */
+    public static ListNode insertionSortList(ListNode head) {
+        if (head==null) return null;// 0
+        if (head.next==null) return head;// 1
+        // >= 2 个元素
+        ListNode sentinel = new ListNode(Integer.MIN_VALUE);//哨兵
+        sentinel.next = head;
+        ListNode sortedTail = head;//有序部分尾结点
+        ListNode unsortedHead = head.next;//无序部分头结点，也是当前待插入前面有序序列的节点
+        int sortedNumber = 1;// 有序的目前只有一个那就是头结点
+
+        while (unsortedHead!=null){
+            ListNode tmp = unsortedHead.next;//保存下一个无序节点
+
+            ListNode smaller = sentinel;//恰好比当前待插节点小的
+            ListNode bigger = smaller.next;//恰好比当前待插节点大的
+            int count = 1;
+            while ( count<=sortedNumber && bigger.val < unsortedHead.val){
+                smaller = smaller.next;
+                bigger = bigger.next;
+                count++;
+            }
+            if (count>sortedNumber){//有序节点都小于无序节点，插在队尾
+                sortedTail.next = unsortedHead;
+                sortedTail = unsortedHead;
+            }else {// 到这里 bigger >= unsortedHead,所以 unsortedHead 要插入到 smaller 和 bigger 之间
+                smaller.next = unsortedHead;
+                unsortedHead.next = bigger;
+            }
+            sortedNumber++;//有序的加一个
+
+            unsortedHead = tmp;//继续下一个无序节点
+        }
+//        没有无序节点了，返回
+        sortedTail.next = null;//必须置为null
+        return  sentinel.next;
     }
 
     /**

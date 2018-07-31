@@ -754,4 +754,58 @@ class TwoListAdd {
             preSlow.next=newBeg;
     }
 
+    /**
+     http://note.youdao.com/noteshare?id=44da5329788d66448d88a18cc2755025&sub=E4C515EB0FA842C8802164CA45347540
+     *
+     首先，关于单链表中的环，一般涉及到一下问题：
+     1.给一个单链表，判断其中是否有环的存在；
+     2.如果存在环，找出环的入口点；
+     3.如果存在环，求出环上节点的个数；
+     4.如果存在环，求出链表的长度；
+     5.如果存在环，求出环上距离任意一个节点最远的点（对面节点）；
+     6.（扩展）如何判断两个无环链表是否相交；
+     7.（扩展）如果相交，求出第一个相交的节点；
+
+     1.判断是否有环（链表头指针为head）
+     对于这个问题我们可以采用“快慢指针”的方法。就是有两个指针fast和slow，开始的时候两个指针都指向链表头head，然后在每一步
+     操作中slow向前走一步即：slow = slow->next，而fast每一步向前两步即：fast = fast->next->next。
+     由于fast要比slow移动的快，如果有环，fast一定会先进入环，而slow后进入环。当两个指针都进入环之后，经过一定步的操作之后
+     二者一定能够在环上相遇，并且此时slow还没有绕环一圈，也就是说一定是在slow走完第一圈之前相遇。
+     */
+    public boolean hasCycle(ListNode head) {
+        ListNode fast, slow ;
+        slow = fast = head ;
+        while (slow != null &&  fast!= null && fast.next != null){
+            slow = slow.next ;
+            fast = fast.next.next ;
+            if (slow == fast)
+                return true ;
+        }
+        return false ;
+    }
+
+    public ListNode detectCycleHead(ListNode head) {
+        ListNode fast, slow ;
+        slow = fast = head ;
+
+        boolean hasCycle = false;
+        while (slow != null &&  fast!= null && fast.next != null) {
+            slow = slow.next ;
+            fast = fast.next.next ;
+            if (slow == fast) {
+                hasCycle = true;
+                break ;
+            }
+        }
+        if (!hasCycle) return null ; //没有环，返回NULL值
+
+        ListNode  ptr1 = head ; //链表开始点
+        ListNode  ptr2 = slow ; //相遇点
+        while (ptr1 != ptr2){
+            ptr1 = ptr1.next ;
+            ptr2 = ptr2.next ;
+        }
+        return ptr1 ; //找到入口点
+    }
+
 }

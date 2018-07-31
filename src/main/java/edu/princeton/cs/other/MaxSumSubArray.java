@@ -3,6 +3,8 @@ package edu.princeton.cs.other;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 import static java.lang.System.out;
 
 /**
@@ -405,6 +407,37 @@ class MaxSumSubArray {
         return maxSumSubArray4(k,tmp);
     }
 
+    /**
+      给定一个整数数组 nums ，找出一个序列中乘积最大的连续子序列（该序列至少包含一个数）。
+     示例 1:
+     输入: [2,3,-2,4]
+     输出: 6
+     解释: 子数组 [2,3] 有最大乘积 6。
+     示例 2:
+     输入: [-2,0,-1]
+     输出: 0
+     解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。
+
+     访问到每个点的时候，以该点为子序列的末尾的乘积，要么是该点本身，要么是该点乘以以前一点为末尾的序列，
+     注意乘积负负得正，故需要记录前面的最大最小值。
+
+     * @param nums
+     * @return
+     */
+    public static int maxProduct(int[] nums) {
+        int posMax = nums[0];
+        int negMax = nums[0];
+        int ret = nums[0];
+        for(int i=1;i<nums.length;i++) {
+            int tempPosMax = posMax;
+            int tempNegMax = negMax;
+            posMax = max(nums[i],max(nums[i]*tempPosMax,nums[i]*tempNegMax));
+            negMax = min(nums[i],min(nums[i]*tempPosMax,nums[i]*tempNegMax));
+            ret = max(ret,posMax);
+        }
+        return ret;
+    }
+
 
         // 感受，问题转化的能力，买卖股票转为最大子段和问题，最大 2 子段和又可以利用最大 1 子段和问题
         // 把问题归一化。
@@ -438,8 +471,11 @@ class MaxSumSubArray {
 
 //            out.println(maxProfit3(2,new int[]{2,4,1}));//2
 //            out.println(maxProfit3(2,new int[]{3,2,6,5,0,3}));//7
-            out.println(maxProfit3(4,new int[]{1,2,4,2,5,7,2,4,9,0}));//
+//            out.println(maxProfit3(4,new int[]{1,2,4,2,5,7,2,4,9,0}));//
 
+            out.println(maxProduct(new int[]{2,3,-2,4}));//6
+            out.println(maxProduct(new int[]{-2,0,-1}));//0
+            out.println(maxProduct(new int[]{2,1,4,-5,-6,2,-1,2,1}));//480
         }
 
 

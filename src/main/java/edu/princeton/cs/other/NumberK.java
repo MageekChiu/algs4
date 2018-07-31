@@ -15,6 +15,11 @@ import static java.lang.System.out;
  */
 class NumberK {
 
+    /**
+        一个无序数组的 数字大小 topK 问题
+
+     思路：二分即可
+     */
     public static Comparable numberK(Comparable[] integers, int k, int left, int right) {
         int storeIndex = Quick.partitionReverse(integers,left,right);
         if (storeIndex > k){// 在左边
@@ -36,4 +41,37 @@ class NumberK {
         k = 9; res = numberK(integers,k-1,0,len-1);//第k大的数 是7， 第9大，下标是8，所以求k-1
         out.println(res);
     }
+
+    /**
+     两个大小分别为n和m的有序的数组，找出这两个数组放在一起后第k大的数。
+
+     思路1：归并的思路，此时复杂度O(k)，k很大时很耗费时间
+     思路2：二分，最优
+     */
+//    public static Comparable numberK(int[]a,int[]b,int k) {
+//
+//    }
+
+    /**
+     很多个数字，可能有几十亿个，找出其中最大的500个
+     这是 数字topK
+
+     思路：大顶堆，复杂度是O(n*lg500)
+     */
+//    public static Comparable topK(int[]a,int k) {
+//
+//    }
+
+    /**
+     很多个数字，可能有几十亿个，找出其中出现次数最大的500个
+     这是频率topK
+
+     思路：用hash分在不同机器上分别统计每台机器的topK
+     然后在所有机器的tok中选择最终的topK
+     */
+//    public static Comparable topKF(int[]a,int k) {
+//
+//    }
+
+
 }

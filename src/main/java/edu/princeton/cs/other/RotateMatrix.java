@@ -274,6 +274,77 @@ class RotateMatrix {
         return result;
     }
 
+    /**
+     给定一个二维的矩阵，包含 'X' 和 'O'（字母 O）。
+     找到所有被 'X' 围绕的区域，并将这些区域里所有的 'O' 用 'X' 填充。
+     示例:
+     X X X X
+     X O O X
+     X X O X
+     X O X X
+     运行你的函数后，矩阵变为：
+     X X X X
+     X X X X
+     X X X X
+     X O X X
+     解释:
+     被围绕的区间不会存在于边界上，换句话说，任何边界上的 'O' 都不会被填充为 'X'。 任
+     何不在边界上，或不与边界上的 'O' 相连的 'O' 最终都会被填充为 'X'。
+     如果两个元素在水平或垂直方向相邻，则称它们是“相连”的。
+
+     思路：x 统一为-1，边界上的O 为 1，
+
+     思路二： 递归遍历二维数组的四条边，将边上为O的变为#，在便利二维数组，遇到O则变为X 遇到# 则变为O
+     */
+    public static void solve(char[][] board) {
+        int m = board.length;// m行
+        if (m<1) return;
+        int n = board[0].length;// n 列
+        if (n<2) return;// 1列或0列都不用改变
+
+        int[][] dp = new int[m][n];
+        // 初始化首尾列
+        for (int i = 0; i < m; i++) {
+            if (board[i][0]=='O') dp[i][0] = 1;
+            else dp[i][0] = -1;
+            if (board[i][n-1]=='O') dp[i][n-1] = 1;
+            else dp[i][n-1] = -1;
+        }
+        // 初始化首尾行
+        for (int i = 0; i < n; i++) {
+            if (board[0][i]=='O') dp[0][i] = 1;
+            else dp[0][i] = -1;
+            if (board[m-1][i]=='O') dp[m-1][i] = 1;
+            else dp[m-1][i] = -1;
+        }
+        // 正向计算DP
+        for (int i = 1; i < m-1; i++) {
+            for (int j = 1; j < n-1; j++) {
+                if ( board[i][j]=='O' && (dp[i-1][j]>0 || dp[i][j-1]>0 || dp[i+1][j]>0 || dp[i][j+1]>0))
+                     dp[i][j] = 1;
+                else
+                    dp[i][j] = -1;
+            }
+        }
+        // 反向计算DP
+        for (int i = m-2; i >0  ; i--) {
+            for (int j = n-2; j >0 ; j--) {
+                if ( board[i][j]=='O' && (dp[i-1][j]>0 || dp[i][j-1]>0 || dp[i+1][j]>0 || dp[i][j+1]>0))
+                    dp[i][j] = 1;
+                else
+                    dp[i][j] = -1;
+            }
+        }
+        // 改变不与边界相连的0
+        for (int i = 1; i < board.length-1; i++) {
+            for (int j = 1; j < board[i].length-1; j++) {
+                if (board[i][j]=='O' && dp[i][j]<0)
+                    board[i][j] = 'X';
+            }
+        }
+
+    }
+
     // 感受：新鲜概念的理解与使用
     public static void main (String ...args){
 //        int[][] input = {
@@ -316,18 +387,47 @@ class RotateMatrix {
 //            }
 //            System.out.println();
 //        }
-        int[][] input = {
-                { 1, 2, 3 },
-                { 4, 5, 6 },
-                { 7, 8, 9 }
+//        int[][] input = {
+//                { 1, 2, 3 },
+//                { 4, 5, 6 },
+//                { 7, 8, 9 }
+//        };
+//        int[][] input1 = {
+//                { 1, 2, 5, 7 },
+//                { 8, 10, 12, 16 },
+//                { 24,22,34,56 }
+//        };
+//        out.println(searchMatrix(input,0));
+//        out.println(searchMatrix(input1,34));
+
+//        char[][] cc = {
+//                {'X', 'X', 'X', 'X','O'},
+//                {'X', 'O', 'O', 'X','X'},
+//                {'X', 'X', 'O', 'X','O'},
+//                {'X', 'O', 'X', 'X','X'},
+//                {'X', 'O', 'X', 'X','X'},
+//        };
+
+        char[][] cc = {
+                {'X','O','X','O','X','O','O','O','X','O'},
+                {'X','O','O','X','X','X','O','O','O','X'},
+                {'O','O','O','O','O','O','O','O','X','X'},
+                {'O','O','O','O','O','O','X','O','O','X'},
+                {'O','O','X','X','O','X','X','O','O','O'},
+                {'X','O','O','X','X','X','O','X','X','O'},
+                {'X','O','X','O','O','X','X','O','X','O'},
+                {'X','X','O','X','X','O','X','O','O','X'},
+                {'O','O','O','O','X','O','X','O','X','O'},
+                {'X','X','O','X','X','X','X','O','O','O'}
         };
-        int[][] input1 = {
-                { 1, 2, 5, 7 },
-                { 8, 10, 12, 16 },
-                { 24,22,34,56 }
-        };
-        out.println(searchMatrix(input,0));
-        out.println(searchMatrix(input1,34));
+        solve(cc);
+        for (char[] chars : cc) {
+            for (char aChar : chars) {
+                out.print(aChar+"->");
+            }
+            out.println();
+        }
+
 
 
 

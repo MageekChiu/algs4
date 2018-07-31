@@ -88,19 +88,22 @@ class TwoListAdd {
     // 感受： 基本数学概念，然后就是各种特殊情况的考虑
     // 有联系的多考虑递归
     public static void main (String ...args){
-        ListNode a = new ListNode(4);
-        ListNode a1 = new ListNode(2);
-        ListNode a2 = new ListNode(1);
-        ListNode a3 = new ListNode(3);
-        a.next=a1;a1.next=a2;a2.next=a3;a3.next=null;
 
+        out.println(reverseWords("1  2 3 4 "));
 
-        // 链表插入排序
-        ListNode res = insertionSortList(a);//
-        while (res!=null){//遍历打印
-            out.print(res.val+"->");
-            res = res.next;
-        }
+//        ListNode a = new ListNode(4);
+//        ListNode a1 = new ListNode(2);
+//        ListNode a2 = new ListNode(1);
+//        ListNode a3 = new ListNode(3);
+//        a.next=a1;a1.next=a2;a2.next=a3;a3.next=null;
+//
+//
+//        // 链表插入排序
+//        ListNode res = insertionSortList(a);//
+//        while (res!=null){//遍历打印
+//            out.print(res.val+"->");
+//            res = res.next;
+//        }
 
 //        ListNode b = new ListNode(5);
 //        ListNode b1 = new ListNode(6);
@@ -806,6 +809,30 @@ class TwoListAdd {
             ptr2 = ptr2.next ;
         }
         return ptr1 ; //找到入口点
+    }
+
+    /**
+     给定一个字符串，逐个翻转字符串中的每个单词。
+     示例:
+     输入: "the sky is blue",
+     输出: "blue is sky the".
+     说明:
+         无空格字符构成一个单词。
+         输入字符串可以在前面或者后面包含多余的空格，但是反转后的字符不能包括。
+         如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。
+         进阶: 请选用C语言的用户尝试使用 O(1) 时间复杂度的原地解法。
+     */
+    public static String reverseWords(String s) {
+        if(s==null)
+            return null;
+        String[] str = s.split("\\s+");//正则可以去掉多个空白
+        //String[] str = sentence.split(" ");
+        StringBuffer sb = new StringBuffer();
+        for (int i = str.length-1; i >=0; i--) {
+            sb.append(str[i]).append(" ");
+        }
+        return sb.toString().trim();
+
     }
 
 }

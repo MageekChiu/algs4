@@ -199,8 +199,36 @@ class WordBreak {
 //        }
 //    }
 
+    /**
+     判断一个字符串集合是否能连接成环，首尾字符相同则认为可以相连，如abc,cde,ea
+
+     第一感觉就是回溯法，复杂度较高，
+
+     再仔细想想，首尾字母全部拿出来，需要每个字母出现的次数都是2的倍数次，且如果同一字母首尾字母相同都是A那么A必须出现4、6、8等次数
+
+
+     不需要用回溯法,可以将问题转化为Euler回路问题.
+     用26个字母作为图的点,每个单词看成一条边,比如单词Love就是从字母L到E的一条边
+     这样我们得到一个图.构造这图的时间复杂度为O(e),其中e为边的数目,也就是单词的数目.
+     首先,我们需要判断这个图是否连通,只要深度优先或广度优先遍历一下图就可以了(时间复杂度为O(e)).如果图不连通,显然无法构成一个环.
+     在连通的条件虾,我们需要判断是否存在一个欧拉回路(或如果不需要成环,是不是存在一条欧拉路径).
+     我们只要判断是否所有的点的出度和入度都相同就可以了.(如果不需要回路,那么允许一个点的出度比入度大1,另外一个点入度比出度大1).这一步时间复杂度是O(1)
+
+
+     * @param strings
+     * @return
+     */
+    public static boolean canBeCircle(String[] strings){
+
+
+
+        return false;
+    }
+
     // 感受：
     public static void main (String ...args){
-        out.println(wordBreak("leetcode",new LinkedList<String>(){{add("leet");add("code");}}));
+//        out.println(wordBreak("leetcode",new LinkedList<String>(){{add("leet");add("code");}}));
+        out.println(canBeCircle(new String[]{"abc","ea","cde"}));//true
+        out.println(canBeCircle(new String[]{"ab","cde","ea"}));// false
     }
 }

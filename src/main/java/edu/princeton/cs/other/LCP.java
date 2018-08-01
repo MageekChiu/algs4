@@ -1,8 +1,5 @@
 package edu.princeton.cs.other;
 
-import com.sun.xml.internal.ws.util.Pool;
-
-import static java.lang.System.in;
 import static java.lang.System.out;
 
 /**
